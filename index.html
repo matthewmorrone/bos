@@ -46,12 +46,15 @@ img {
     border: none;
 }
 header {
-    background-image: url("img/backgrounds/header.webp");
     width: 100%;
     height: 100px;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid var(--trim);
+    background-image: url("img/backgrounds/header.webp");
+    background-position: top;
+    background-size: cover;
+    border-bottom: 2px solid var(--trim);
+    display: flex;
+    justify-content: space-between;
+    z-index: 999;
 }
 .fixed {
     position: fixed;
@@ -69,12 +72,13 @@ header {
 }
 
 nav {
-    float: right;
     font-size: 25px;
     font-weight: 700;
     display: flex;
+    justify-content: space-around;
     flex-flow: row nowrap;
     align-items: center;
+    margin-right: 100px;
 }
 nav ul {
     display: flex;
@@ -82,9 +86,14 @@ nav ul {
     justify-content: flex-end;
     list-style: none;
 }
+nav li:not(:last-child)::after {
+    content: '|';
+    color: var(--trim);
+    font-size: 15px;
+    vertical-align: middle;
+}
 nav ul a {
     text-decoration: none;
-    display: block;
     padding: 1em;
     color: white;
 }
@@ -126,7 +135,7 @@ nav ul a {
     height: 30px; 
     border-radius: 50%;
     vertical-align: middle;
-    margin-left: 20px;
+    margin-left: 5px;
     text-align: center;
 }
 .social i {
@@ -140,13 +149,24 @@ section h1 {
     color: var(--font);
     text-align: center;
     font-size: 72px;
+    margin: 50px;
 }
-
+#splash {
+    overflow: hidden;
+}
+.splash-background {
+    position: relative;
+    overflow-x: hidden;
+}
 .splash-background iframe {
     width: 100%;
     height: 100vh;
+    scale: 125%;
+    position: relative;
+    z-index: -999;
     pointer-events: none;
     overflow: hidden;
+
 }
 .splash-title {
     display: flex;
@@ -190,11 +210,15 @@ section h1 {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
+    width: 80%;
+    margin: auto;
 }
 .emphasized {
     border: 1px solid white;
     margin: 25px;
     text-align: center;
+    width: 80%;
+    margin: auto;
 }
 .event {
     max-width: 100%;
@@ -223,6 +247,15 @@ section h1 {
 }
 .event .button:link {
     color: white !important;
+}
+
+.grid {
+    width: 80%;
+    margin: auto;
+}
+.tile {
+    margin: 10px;
+    white-space: nowrap;
 }
 
 #photos .grid {
@@ -257,6 +290,8 @@ section h1 {
     width: 178px;
     height: 231px;
     object-fit: cover;
+    filter: drop-shadow(25px 25px 25px #222);
+
 }
 
 #djs .grid {
@@ -314,15 +349,21 @@ section h1 {
     display: flex;
     flex-flow: row wrap;
 }
-#partners-grid div div {
-    width: 25%;
-}
+
 #models, #partners h1 {
     background-image: url("img/backgrounds/polka-dots.svg");
     text-align: left;
     letter-spacing: 3px;
     background-position: bottom center;
     background-size: cover;
+}
+#partners h1 {
+    width: 100%;
+    margin: 0px;
+    padding-left: 20px;
+    /* margin-left: 20px; */
+    margin-bottom: 50px;
+    padding-bottom: 20px;
 }
 #partners-grid {
     display: grid;
@@ -406,6 +447,12 @@ footer p {
     text-transform: uppercase;
     text-align: center;
 }
+#models .container .overlay {
+    background-color: #191A3A;
+}
+#models .container .hover-text {
+    color: white;
+}
 </style>
 </head>
 <body>
@@ -431,7 +478,7 @@ footer p {
 </header>
 <section id="splash">
     <div class='splash-background'>
-        <iframe src="https://www.youtube.com/embed/63ywvGq_OhY?controls=0&showinfo=0&rel=0&mute=1&autoplay=1&loop=1"  frameborder="0" allowfullscreen></iframe>
+        <iframe scrolling="no" src="https://www.youtube.com/embed/63ywvGq_OhY?controls=0&showinfo=0&rel=0&mute=1&autoplay=1&loop=1"  frameborder="0" allowfullscreen></iframe>
     </div>
     <div class="splash-title">
         <h2>BOS PHILLY</h2>		
@@ -632,19 +679,39 @@ async function loadTiles() {
 
 $(() => {
     $.ajaxSetup({cache: false});
-    loadTiles();
-});
 
-$(window).scroll(function() {
-    let sticky = $('header'), scroll = $(window).scrollTop();
-    if (scroll > 0) sticky.addClass('fixed');
-    else sticky.removeClass('fixed');
+    $(".splash-title").position({
+        my: "bottom",
+        at: "center",
+        of: "#splash"
+    });
+    // log($("#splash").css("width"), $('.splash-title').width())
+    // $('.splash-title').css({
+    //     "position": "absolute",
+    //     "top" : ( $("#splash").height() - $('.splash-title').height() ) / 2 + "px",
+    //     "left": ( $("#splash").width()  - $('.splash-title').width()  ) / 2 + "px"
+    // });
+    // $(".splash-title").css("margin-top", $(".splash-title").css("top"))
+
+    $(".charity-title").position({
+        my: "center",
+        at: "center",
+        of: "#charity"
+    });
+
+    loadTiles();
 });
 
 
 let hasFired = false;
 let increment = 1000;
 $(window).scroll(function() {
+
+    
+    let sticky = $('header'), scroll = $(window).scrollTop();
+    if (scroll > 0) sticky.addClass('fixed');
+    else sticky.removeClass('fixed');
+    
     let hT = $('#charity').offset().top,
         hH = $('#charity').outerHeight(),
         wH = $(window).height(),
@@ -725,22 +792,6 @@ Math.easeInOutQuad = function(t, b, c, d) {
     t--;
     return -c/2 * (t*(t-2) - 1) + b;
 };
-
-$(".splash-title").position({
-    my: "center",
-    at: "center",
-    of: "#splash"
-});
-$(".charity-title").position({
-    my: "center",
-    at: "center",
-    of: "#charity"
-});
-
-
-
-
-
 
 </script>
 </body>
