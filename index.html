@@ -16,6 +16,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/youtube-background@1.1.7/jquery.youtube-background.min.js "></script>
+<script src="router.js"></script>
+<script src="utils.js"></script>
 <style>
 * {
     margin: 0px;
@@ -116,28 +118,6 @@ nav ul a {
     }
 }
 
-
-/* 
-nav {
-    margin-top: 15px;
-    margin-right: 300px;
-    text-align: center;
-    float: right;
-    display: inline;
-    font-size: 25px;
-    font-weight: 700;
-}
-nav ul {
-    display: inline-block;
-    list-style-type: none;
-    padding: 0;
-}
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-*/
-
 .social {
     background-color: var(--trim);
     font-size: 15px;
@@ -229,7 +209,7 @@ section h1 {
 }
 .event .button, #events .button {
     display: block;
-    background-color: #ED208B;
+    background-color: var(--trim);
     color: white;
     border-radius: 5px;
     width: 100px;
@@ -251,7 +231,7 @@ section h1 {
 }
 #photos .tile {
     width: 350px;
-    height: 231;
+    height: 231px;
     text-align: center;
     justify-self: center;
     align-self: center;
@@ -261,12 +241,40 @@ section h1 {
     height: 231px;
     object-fit: cover;
 }
-#photos .tile img:hover {
-    background-color: var(--trim);
-    transition: all 500ms ease-out 1s;
+
+#models .grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+#models .tile {
+    width: 178px;
+    height: 231px;
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+}
+#models .tile img {
+    width: 178px;
+    height: 231px;
+    object-fit: cover;
 }
 
-
+#djs .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+#djs .tile {
+    width: 228px;
+    height: 361px;
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+}
+#djs .tile img {
+    width: 228px;
+    height: 361px;
+    object-fit: cover;
+}
 
 #board {
     display: flex;
@@ -309,8 +317,8 @@ section h1 {
 #partners-grid div div {
     width: 25%;
 }
-#partners h1 {
-    background-image: url("img/backgrounds/partners.svg");
+#models, #partners h1 {
+    background-image: url("img/backgrounds/polka-dots.svg");
     text-align: left;
     letter-spacing: 3px;
     background-position: bottom center;
@@ -399,13 +407,6 @@ footer p {
     text-align: center;
 }
 </style>
-<script>
-$(window).scroll(function() {
-    let sticky = $('header'), scroll = $(window).scrollTop();
-    if (scroll > 0) sticky.addClass('fixed');
-    else sticky.removeClass('fixed');
-});
-</script>
 </head>
 <body>
 <header>
@@ -500,30 +501,15 @@ $(window).scroll(function() {
 </section>
 <section id="photos">
     <h1>Photos</h1>
-    <div class="grid">
-        <div class="tile container">
-            <img src="img/events/jungle.webp" class="hover" />
-            <div class="overlay"><div class="hover-text">Welcome to the Jungle</div></div>
-        </div>
-        <div class="tile container">
-            <img src="img/events/miami-vice.webp" class="hover" alt="Miami Vice" />
-            <div class="overlay"><div class="hover-text">Miami Vice</div></div>
-        </div>
-        <div class="tile container">
-            <img src="img/events/super-bros.jpg" class="hover" alt="Super Bros" />
-            <div class="overlay"><div class="hover-text">Super Bros</div></div>
-        </div>
-        <div class="tile container">
-            <img src="img/events/candyland.jpg" class="hover" alt="Candyland" />
-            <div class="overlay"><div class="hover-text">Candyland</div></div>
-        </div>
-    </div>
+    <div class="grid"></div>
 </section>
 <section id="models">
     <h1>BOS Ambassadors</h1>
+    <div class="grid"></div>
 </section>
 <section id="djs">
     <h1>DJs</h1>
+    <div class="grid"></div>
 </section>
 <section id="board">
     <h1>BOS Board</h1>
@@ -573,7 +559,7 @@ $(window).scroll(function() {
 </section>
 <section id="partners">
     <h1>Partners:</h1>
-    <div id="partners-grid" class="">
+    <div id="partners-grid">
         <div><a href="https://circuitmom.com/"><img id="circuitmom" src="img/partners/circuit-mom.png" /></a></div>
         <div><a href="https://www.waygay.org/"><img src="img/partners/william-way.png" /></a></div>
         <div><a href="https://www.andrewchristian.com/"><img src="img/partners/andrew-christian.png" /></a></div>
@@ -603,36 +589,61 @@ $(window).scroll(function() {
     </div>
 </footer>
 <script>
-Object.defineProperty(Object.prototype, "define", {
-    configurable: true,
-    enumerable: false,
-    writable: true,
-    value: function(name, value) {
-        if (Object[name]) {
-            delete Object[name];
-        }
-        Object.defineProperty(this, name, {
-            configurable: true,
-            enumerable: false,
-            writable: true,
-            value: value
-        });
-        return this;
-    }
-});
+
+async function loadTiles() {
+    let photos = await $get("photos.csv");
+    photos = photos.trim().split("\n").map(line => line.split(","));
+    photos.each(photo => {
+        let [event, url, image] = [...photo]
+        $("#photos .grid").append(`<div class="tile container">
+            <a href="${url}">
+                <img src="${image}" class="hover" />
+                <div class="overlay"><div class="hover-text">${event}</div></div>
+            </a>
+        </div>`);
+    });
+
+    let models = await $get("models.csv");
+    models = models.trim().split("\n").map(line => line.split(","));
+    models.each(model => {
+        let [event, url, image] = [...model]
+        $("#models .grid").append(`<div class="tile container">
+            <a href="${url}">
+                <img src="${image}" class="hover" />
+                <div class="overlay"><div class="hover-text">${event}</div></div>
+            </a>
+        </div>`);
+    });
+
+    let djs = await $get("djs.csv");
+    djs = djs.trim().split("\n").map(line => line.split(","));
+    djs.each(dj => {
+        let [event, url, image] = [...dj]
+        $("#djs .grid").append(`<div class="tile container">
+            <a href="${url}">
+                <img src="${image}" class="hover" />
+                <div class="overlay"><div class="hover-text">${event}</div></div>
+            </a>
+        </div>`);
+    });
 
 
-Math.define("nativeRound", Math.round)
-Math.define("round", function(i, n) {
-    return +i.toFixed(n);
+}
+
+$(() => {
+    $.ajaxSetup({cache: false});
+    loadTiles();
 });
+
+$(window).scroll(function() {
+    let sticky = $('header'), scroll = $(window).scrollTop();
+    if (scroll > 0) sticky.addClass('fixed');
+    else sticky.removeClass('fixed');
+});
+
 
 let hasFired = false;
 let increment = 1000;
-let USDollar = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-});
 $(window).scroll(function() {
     let hT = $('#charity').offset().top,
         hH = $('#charity').outerHeight(),
