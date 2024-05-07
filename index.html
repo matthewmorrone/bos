@@ -98,35 +98,6 @@ nav ul a {
     color: white;
 }
 
-@media all and (max-width: 800px) {
-    nav ul {
-        justify-content: space-around;
-    }
-    nav {
-        display: none;
-    }
-}
-
-@media all and (max-width: 600px) {
-    nav ul {
-        flex-flow: column wrap;
-        padding: 0;
-    }
-    nav ul a { 
-        text-align: center; 
-        padding: 10px;
-        border-top: 1px solid rgba(255, 255, 255,0.3); 
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
-    }
-    nav ul li:last-of-type a {
-        border-bottom: none;
-    }
-
-    nav {
-        display: none;
-    }
-}
-
 .social {
     background-color: var(--trim);
     font-size: 15px;
@@ -453,6 +424,53 @@ footer p {
 #models .container .hover-text {
     color: white;
 }
+
+@media all and (max-width: 600px) {
+    #logo {
+        margin-top: 15px;
+        margin-left: 15px;
+    }
+    nav ul {
+        display: none;
+    }
+    .splash-background iframe {
+        width: 100%;
+        height: 250px;
+        scale: 125%;
+    }
+    .splash-title h2 {
+        font-size: 100px;
+    }
+    .emphasized img {
+        width: -webkit-fill-available;
+    }
+    .events-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    #photos .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    #models .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #djs .grid {
+        grid-template-columns: repeat(4, 1fr);
+        width: unset;
+    }
+    #models h1 {
+        font-size: 40px;
+    }
+    #djs .tile, #djs .tile img {
+        width: 100px;
+        height: 261px;
+    }
+    #partners-grid img {
+        width: 100px !important;
+    }
+    #board .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
 </style>
 </head>
 <body>
@@ -640,9 +658,10 @@ footer p {
 async function loadTiles() {
     let photos = await $get("events.csv");
     photos = photos.trim().split("\n").map(line => line.split(","));
+    let $photosGrid = $("#photos .grid");
     photos.each(photo => {
         let [event, url, image] = [...photo]
-        $("#photos .grid").append(`<div class="tile container">
+        $photosGrid.append(`<div class="tile container">
             <a href="${url}">
                 <img src="${image}" class="hover" />
                 <div class="overlay"><div class="hover-text">${event}</div></div>
@@ -652,9 +671,10 @@ async function loadTiles() {
 
     let models = await $get("models.csv");
     models = models.trim().split("\n").map(line => line.split(","));
+    let $modelGrid = $("#models .grid");
     models.each(model => {
         let [event, url, image] = [...model]
-        $("#models .grid").append(`<div class="tile container">
+        $modelGrid.append(`<div class="tile container">
             <a href="${url}">
                 <img src="${image}" class="hover" />
                 <div class="overlay"><div class="hover-text">${event}</div></div>
@@ -664,9 +684,10 @@ async function loadTiles() {
 
     let djs = await $get("djs.csv");
     djs = djs.trim().split("\n").map(line => line.split(","));
+    let $djGrid = $("#djs .grid");
     djs.each(dj => {
         let [event, url, image] = [...dj]
-        $("#djs .grid").append(`<div class="tile container">
+        $djGrid.append(`<div class="tile container">
             <a href="${url}">
                 <img src="${image}" class="hover" />
                 <div class="overlay"><div class="hover-text">${event}</div></div>
