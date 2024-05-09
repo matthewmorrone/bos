@@ -15,7 +15,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/youtube-background@1.1.7/jquery.youtube-background.min.js "></script>
 <script src="router.js"></script>
 <script src="utils.js"></script>
 <style>
@@ -28,6 +27,7 @@
 }
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 body {
     width: 100%;
@@ -120,30 +120,23 @@ section h1 {
     color: var(--font);
     text-align: center;
     font-size: 72px;
-    margin: 50px;
+    padding: 50px;
 }
 #splash {
-    overflow: hidden;
-}
-.splash-background {
-    position: relative;
-    overflow-x: hidden;
-}
-.splash-background iframe {
-    width: 100%;
-    height: 100vh;
-    scale: 125%;
-    position: relative;
-    z-index: -999;
-    pointer-events: none;
-    overflow: hidden;
-
-}
-.splash-title {
     display: flex;
     align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
+    justify-content: center;
+}
+.splash-title {
+    position: absolute;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+.splash-background video {
+    width: 100%;
+    pointer-events: none;
 }
 .splash-title h2 {
     color: var(--trim);
@@ -157,10 +150,24 @@ section h1 {
     margin-top: -50px;
 }
 #charity {
-    height: 232px;
-    color: white;
     text-align: center;
+    width: 100%;
+    height: 232px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.charity-background {
+    height: 100%;
+    width: 100%;
+}
+.charity-title {
+    position: absolute;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
 }
 #parallax {
     height: 100%;
@@ -190,6 +197,9 @@ section h1 {
     text-align: center;
     width: 80%;
     margin: auto;
+}
+.emphasized div {
+    clear: both;
 }
 .event {
     max-width: 100%;
@@ -262,7 +272,6 @@ section h1 {
     height: 231px;
     object-fit: cover;
     filter: drop-shadow(25px 25px 25px #222);
-
 }
 
 #djs .grid {
@@ -331,9 +340,7 @@ section h1 {
 #partners h1 {
     width: 100%;
     margin: 0px;
-    padding-left: 20px;
-    /* margin-left: 20px; */
-    margin-bottom: 50px;
+    padding-top: 20px;
     padding-bottom: 20px;
 }
 #partners-grid {
@@ -342,6 +349,8 @@ section h1 {
     grid-template-columns: repeat(4, 1fr);
     width: 80%;
     margin: auto !important;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 #partners-grid div {
     justify-self: center;
@@ -363,6 +372,7 @@ footer {
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);
     display: flex;
     flex-flow: row nowrap;
+    margin-left: auto;
 }
 footer div {
     display: flex;
@@ -370,6 +380,9 @@ footer div {
     width: 40%;
     margin-left: 5%;
     margin-right: 5%;
+}
+footer div * {
+    margin: 5px;
 }
 footer p {
     font-family: 'Work Sans', sans-serif;
@@ -500,7 +513,9 @@ footer p {
 </header>
 <section id="splash">
     <div class='splash-background'>
-        <iframe scrolling="no" src="https://www.youtube.com/embed/63ywvGq_OhY?controls=0&showinfo=0&rel=0&mute=1&autoplay=1&loop=1"  frameborder="0" allowfullscreen></iframe>
+        <video autoplay loop muted poster="">
+            <source src="img/mp4/Jungle Aftermovie (big).mp4" type="video/mp4">
+        </video>
     </div>
     <div class="splash-title">
         <h2>BOS PHILLY</h2>		
@@ -508,7 +523,9 @@ footer p {
 	</div>
 </section>
 <section id="charity">
-    <img id='parallax' />
+    <div class="charity-background">
+        <img id='parallax' />
+    </div>
     <div class="charity-title">
         <h2>&nbsp;<span class="counter" start="0.00" current="0.00" end="75430.37"></span></h2>
         <p class="counter-title">Donated to local LGBT Charities since 2018</p>
@@ -518,7 +535,7 @@ footer p {
     <h1>Events</h1>
     <div class="emphasized">
         <img width="1024" height="299" src="img/events/opulence-banner.png"/>
-        <span>Philly Pride June 1, 2024! Click for details…</span>
+        <div>Philly Pride June 1, 2024! Click for details…</div>
     </div>
     <div class="events-grid">  
         <div class="event">
@@ -605,7 +622,7 @@ footer p {
             </div>
         </div>
         <div class="tile">
-            <img src="img/board/alex.png" alt="Alex Ortix" />
+            <img src="img/board/alex.png" alt="Alex Ortiz" />
             <h3>Alex Ortiz</h3>
             <h4>Director of Outreach</h4>
             <div class="contact">
@@ -698,32 +715,11 @@ async function loadTiles() {
             </a>
         </div>`);
     });
-
-
 }
 
 $(() => {
     $.ajaxSetup({cache: false});
-
-    $(".splash-title").position({
-        my: "bottom",
-        at: "center",
-        of: "#splash"
-    });
-    // log($("#splash").css("width"), $('.splash-title').width())
-    // $('.splash-title').css({
-    //     "position": "absolute",
-    //     "top" : ( $("#splash").height() - $('.splash-title').height() ) / 2 + "px",
-    //     "left": ( $("#splash").width()  - $('.splash-title').width()  ) / 2 + "px"
-    // });
-    // $(".splash-title").css("margin-top", $(".splash-title").css("top"))
-
-    $(".charity-title").position({
-        my: "center",
-        at: "center",
-        of: "#charity"
-    });
-
+    $("#splash video").width($("#splash").width())
     loadTiles();
 });
 
@@ -793,7 +789,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        const offsetTop = target.offsetTop;
+        const offsetTop = target.offsetTop - $("header").height();
         scrollTo(document.documentElement, offsetTop, 600);
     });
 });
