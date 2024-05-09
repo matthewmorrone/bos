@@ -589,14 +589,10 @@ footer span {
         font-size: 20px;
         margin-top: unset;
     }
-    /*
-
-
-
-
-
     .emphasized img {
         width: -webkit-fill-available;
+        object-fit: contain;
+        height: unset;
     }
     .events-grid {
         grid-template-columns: repeat(1, 1fr);
@@ -611,6 +607,7 @@ footer span {
         grid-template-columns: repeat(4, 1fr);
         width: unset;
     }
+
     #models h1 {
         font-size: 40px;
     }
@@ -622,9 +619,15 @@ footer span {
         width: 100px !important;
     }
     #board .grid {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
-    */
+    #board .tile {
+        width: 200px;
+    }
+    footer h3 {
+        font-size: 24px;
+        text-align: center;
+    }
 }
 </style>
 </head>
