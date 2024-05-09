@@ -184,6 +184,12 @@ section h1 {
 #charity p {
     font-size: 19px;
 }
+#events {
+    background-image: url("img/backgrounds/events-background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 .events-grid {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
@@ -193,10 +199,12 @@ section h1 {
 }
 .emphasized {
     border: 1px solid white;
+    border-radius: 25px;
     margin: 25px;
     text-align: center;
     width: 80%;
     margin: auto;
+    background-color: rgb(25, 26, 58);
 }
 .emphasized div {
     clear: both;
@@ -207,10 +215,20 @@ section h1 {
     margin: 25px;
     text-align: center;
     justify-self: center;
-    align-self: center;
+    align-self: stretch;
+    background-color: rgb(25, 26, 58);
 }
 .event img {
     width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+.event h3 {
+    font-size: 50px;
+}
+.event h4 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
 }
 .event .button, #events .button {
     display: block;
@@ -266,6 +284,7 @@ section h1 {
     text-align: center;
     justify-self: center;
     align-self: center;
+    background-color: rgba(0, 0, 0, .1);
 }
 #models .tile img {
     width: 178px;
@@ -274,6 +293,14 @@ section h1 {
     filter: drop-shadow(25px 25px 25px #222);
 }
 
+
+#djs {
+    background-image: url("img/backgrounds/djs-background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* filter: blur(25px); */
+}
 #djs .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
