@@ -575,7 +575,7 @@ footer span {
 </style>
 </head>
 <body>
-<header>
+<header class="fixed">
     <a href="http://bosphilly.com">
         <img id="logo" src="https://bosphilly.com/wp-content/uploads/2021/03/162528690_3841567515927956_3033548685814258535_n-2-e1616116421988-1024x620.png" alt="BOS Logo">
     </a>
@@ -585,7 +585,7 @@ footer span {
             <li><a href="#photos">Photos</a></li>
             <li><a href="#models">Ambassadors</a></li>
             <li><a href="#djs">DJs</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#board">About</a></li>
         </ul>
         <span>
             <a class='social' href="http://facebook.com/bosphilly" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -822,6 +822,7 @@ $(() => {
 });
 
 
+
 let hasFired = false;
 let increment = 1000;
 let USDollar = new Intl.NumberFormat('en-US', {
@@ -829,10 +830,12 @@ let USDollar = new Intl.NumberFormat('en-US', {
     currency: 'USD',
 });
 $(window).scroll(function() {
+    // sticky header
     let sticky = $('header'), scroll = $(window).scrollTop();
     if (scroll > 0) sticky.addClass('fixed');
     else sticky.removeClass('fixed');
     
+    // charity counter animation
     let hT = $('#charity').offset().top,
         hH = $('#charity').outerHeight(),
         wH = $(window).height(),
@@ -862,17 +865,15 @@ $(window).scroll(function() {
     }
 });
 
-$("#signup").click(function() {
-    $("#email").click();
-});
+// parallax image movement
 
 let currentZoom = 1.5; 
 let minZoom = 1; 
 let maxZoom = 2; 
 let stepSize = 0.01;
-    
+
 $('body')[0].addEventListener('wheel', function(event) { 
-    let direction = event.deltaY > 0 ? -1 : 1; 
+    let direction = event.deltaY > 0 ? 1 : -1; 
     zoomImage(direction); 
 });
 
@@ -885,6 +886,8 @@ function zoomImage(direction) {
     let image = document.querySelector('#parallax'); 
     image.style.transform = 'scale(' + currentZoom + ')'; 
 }
+
+// smooth scroll when clicking header links
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
