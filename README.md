@@ -8,7 +8,8 @@
 + Charity counter animation could be better
 + Phantom border around parallax image
 + Model images have that extra border at the bottom. Either hide or modify images
-+ Mobile layout could use some work
++ Mobile layout could use some work, especially the grids and the splash size. Menu currently hidden
++ Charity animation not triggered on mobile until first scroll event
 
 ### Under the Hood
 + Upgrade events section styling and loading to match other sections
