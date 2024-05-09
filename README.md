@@ -14,6 +14,8 @@
 ### Under the Hood
 + Upgrade events section styling and loading to match other sections
 + Newsletter signup doesn't seem to do anything?
++ Optimize and clean up code, reorder and separate out into files
++ Decide what to host and what to grab from CDNs
 
 ### Next Steps
 + Testing of website in major mobile and desktop browsers
