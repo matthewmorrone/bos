@@ -35,36 +35,42 @@ header {
     border-bottom: 2px solid var(--trim);
     display: flex;
     justify-content: space-between;
-    z-index: 999;
     -webkit-transition: all 0.5s ease;
-    -moz-transition: position 10s;
-    -ms-transition: position 10s;
-    -o-transition: position 10s;
     transition: all 0.5s ease;
+    animation: slideUp .25s forwards;
 }
 .fixed {
     width: 100%;
     position: fixed;
+    z-index: 999;
     top: 0; 
     left: 0;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
-    animation: smoothScroll 1s forwards;
+    animation: slideDown .25s forwards;
 }
-@keyframes smoothScroll {
-	0% {
-		transform: translateY(-40px);
-	}
-	100% {
-		transform: translateY(0px);
-	}
+@keyframes slideDown {
+    from {
+        height: 100px;
+    }
+    to {
+        height: 80px;
+    }
+}
+@keyframes slideUp {
+    from {
+        height: 80px;
+    }
+    to {
+        height: 100px;
+    }
 }
 
 #logo {
     width: 120px;
     height: 70px;
     margin-top: 15px;
-    margin-left: 150px;
+    margin-left: 100px;
 }
 
 nav {
@@ -85,6 +91,7 @@ nav ul {
 nav span {
     display: flex;
     flex-flow: nowrap;
+    height: 36px;
 }
 nav li:not(:last-child)::after {
     content: '|';
@@ -106,7 +113,7 @@ nav ul a {
     height: 30px; 
     border-radius: 50%;
     vertical-align: middle;
-    margin-left: 5px;
+    margin-left: 10px;
     text-align: center;
 }
 .social i {

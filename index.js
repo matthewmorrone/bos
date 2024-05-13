@@ -65,7 +65,7 @@ $(window).scroll(function() {
         
         let interval = setInterval(function() {
             let value = Math.round(parseFloat($(".counter").attr("current")), 2);
-            if (value + increment < end) {
+            if (value + increment <= end) {
                 value += increment;
                 $(".counter").attr("current", Math.round(value, 2));
                 $(".counter").text(USDollar.format($(".counter").attr("current")))
@@ -79,7 +79,7 @@ $(window).scroll(function() {
         }, 15)
         hasFired = true;
     }
-}).scroll();
+})
 
 // parallax image movement
 let currentZoom = 1; 
