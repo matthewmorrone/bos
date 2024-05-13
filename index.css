@@ -35,8 +35,6 @@ header {
     border-bottom: 2px solid var(--trim);
     display: flex;
     justify-content: space-between;
-}
-.fixed {
     width: 100%;
     position: fixed;
     top: 0; 
@@ -44,7 +42,38 @@ header {
     z-index: 999;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
+    /* animation-name: slideUp; */
 }
+/* 
+.fixed {
+    height: 75px;
+    animation-duration: .5s;
+    animation-name: slideDown;
+}
+.fixed #logo {
+    width: 95px; 
+    height: 58px;
+}
+@keyframes slideDown {
+    from {
+        height: 100px;
+    }
+    to {
+        height: 75px;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        height: 75px;
+    }
+    to {
+        height: 100px;
+    }
+}
+ */
+
+
 #logo {
     width: 120px;
     height: 70px;

@@ -3,9 +3,9 @@
 ## To-Do List
 
 ### Appearance
-+ Sticky header animation could be better, resize logo
-+ Parallax animation with touch interaction on mobile
-+ Splash video still sometimes interactable
++ Sticky header animation doesn't seem worth the trouble
++ Parallax animation doesn't work with mobile touch interaction
++ Splash video still sometimes interactable on mobile
 
 ### Under the Hood
 + Upgrade events section styling and loading to match other sections

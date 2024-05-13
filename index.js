@@ -47,9 +47,9 @@ let USDollar = new Intl.NumberFormat('en-US', {
 });
 $(window).scroll(function() {
     // sticky header
-    // let sticky = $('header'), scroll = $(window).scrollTop();
-    // if (scroll > 0) sticky.addClass('fixed');
-    // else sticky.removeClass('fixed');
+    let sticky = $('header'), scroll = $(window).scrollTop();
+    if (scroll > 0) sticky.addClass('fixed');
+    else sticky.removeClass('fixed');
 
     // charity counter animation
     let hT = $('#charity').offset().top,
