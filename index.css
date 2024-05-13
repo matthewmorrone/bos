@@ -138,6 +138,7 @@ section h1 {
     padding: 50px;
 }
 #splash {
+    margin-top: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -333,12 +334,12 @@ button {
     justify-self: center;
     align-self: center;
     background-color: rgba(0, 0, 0, .1);
+    filter: drop-shadow(25px 25px 25px #222);
 }
 #models .tile img {
     width: 178px;
-    height: 232px;
+    height: 233px;
     object-fit: cover;
-    filter: drop-shadow(25px 25px 25px #222);
 }
 
 
@@ -630,6 +631,9 @@ footer span {
     #models .grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    #models .tile {
+        filter: none;
+    }
     #djs .grid {
         grid-template-columns: repeat(4, 1fr);
         width: unset;
@@ -659,6 +663,11 @@ footer span {
     }
     #partners-grid img {
         width: 100px !important;
+    }
+    #partners h1 {
+        padding-top: 5px;
+        padding-left: 15px;
+        padding-bottom: 5px;
     }
     #board .grid {
         grid-template-columns: repeat(2, 1fr);
