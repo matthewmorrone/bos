@@ -3,9 +3,9 @@
 ## To-Do List
 
 ### Appearance
-+ Parallax animation with touch interaction on mobile
 + Sticky header animation could be better, resize logo
-+ Model images have that extra border at the bottom. Either hide or modify images
++ Parallax animation with touch interaction on mobile
++ Splash video still sometimes interactable
 
 ### Under the Hood
 + Upgrade events section styling and loading to match other sections

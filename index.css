@@ -35,37 +35,16 @@ header {
     border-bottom: 2px solid var(--trim);
     display: flex;
     justify-content: space-between;
-    -webkit-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    animation: slideUp .25s forwards;
 }
 .fixed {
     width: 100%;
     position: fixed;
-    z-index: 999;
     top: 0; 
     left: 0;
+    z-index: 999;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
-    animation: slideDown .25s forwards;
 }
-@keyframes slideDown {
-    from {
-        height: 100px;
-    }
-    to {
-        height: 80px;
-    }
-}
-@keyframes slideUp {
-    from {
-        height: 80px;
-    }
-    to {
-        height: 100px;
-    }
-}
-
 #logo {
     width: 120px;
     height: 70px;
@@ -234,6 +213,10 @@ video::-webkit-media-controls {
     margin: auto;
     background-color: var(--back);
 }
+.emphasized img {
+    width: 1024px;
+    height: 299px;
+}
 .emphasized p {
     text-align: right;
     margin-right: 20px;
@@ -324,7 +307,7 @@ button {
 }
 #models .tile img {
     width: 178px;
-    height: 231px;
+    height: 232px;
     object-fit: cover;
     filter: drop-shadow(25px 25px 25px #222);
 }
@@ -455,6 +438,11 @@ footer div {
 footer div * {
     margin: 5px;
 }
+.learn-more {
+    margin: 0px;
+    color: #ff00ff;
+    font-weight: bold;
+}
 footer h3 {
     font-size: 30px;
 }
@@ -477,18 +465,20 @@ footer span {
     text-align: center;
 }
 #email {
-    padding: 5px 5px 5px 20px;
+    padding: 5px 25px 5px;
     border-radius: 5px;
+    height: 22px;
 }
 #email::placeholder {
     color: var(--trim);
+    text-align: center; 
 }
 #signup {
     background-color: var(--trim);
     color: var(--font);
     border: none;
     border-radius: 5px;
-    padding: 5px 5px 5px 20px;
+    padding: 5px;
 }
 
 
@@ -650,5 +640,8 @@ footer span {
     footer h3 {
         font-size: 24px;
         text-align: center;
+    }
+    footer div {
+        width: 33%;
     }
 }

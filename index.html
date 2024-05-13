@@ -4,23 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=.9, viewport-fit=cover">
 <title>BOS Philly - Bringing Circuit Back to Philly</title>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/page.js/1.11.6/page.js"></script> <!-- https://github.com/visionmedia/page.js -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 <link rel="icon" href="https://bosphilly.com/wp-content/uploads/2022/08/android-chrome-512x512-1-75x75.png" sizes="32x32">
 <link rel="icon" href="https://bosphilly.com/wp-content/uploads/2022/08/android-chrome-512x512-1-300x300.png" sizes="192x192">
 <link rel="apple-touch-icon" href="https://bosphilly.com/wp-content/uploads/2022/08/android-chrome-512x512-1-300x300.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
 <script src="router.js"></script>
 <script src="utils.js"></script>
 <link rel="stylesheet" href="index.css" />
 </head>
 <body>
-<header>
+<header class="fixed">
     <a href="http://bosphilly.com">
         <img id="logo" src="https://bosphilly.com/wp-content/uploads/2021/03/162528690_3841567515927956_3033548685814258535_n-2-e1616116421988-1024x620.png" alt="BOS Logo">
     </a>
@@ -65,7 +64,7 @@
     <h1>Events</h1>
     <div class="emphasized">
         <a href="https://bosphilly.com/opulence/">
-            <img width="1024" height="299" src="img/events/opulence-banner.png"/>
+            <img src="img/events/opulence-banner.png"/>
             <p>Philly Pride June 1, 2024! Click for details…</p>
         </a>
     </div>
@@ -215,7 +214,8 @@
     </div>
     <div>
         <h3>Committed To Philadelphia</h3>
-        <p>BOS Philly brings circuit parties to Philadelphia with international DJs and top-notch production while supporting local LGBT charities. Our events are unique and inclusive, creating an unforgettable experience. Join us to make a positive impact on the community while dancing the night away. <a style="color: #ff00ff;" href="https://www.bosphilly.com/board/"><strong> Learn more about us &gt;&gt;</strong></a></p>
+        <p>BOS Philly brings circuit parties to Philadelphia with international DJs and top-notch production while supporting local LGBT charities. Our events are unique and inclusive, creating an unforgettable experience. Join us to make a positive impact on the community while dancing the night away.</p>
+        <p><a class='learn-more' href="https://www.bosphilly.com/board/">Learn more about us >></a></p>
     </div>
 </footer>
 <script src="index.js"></script>

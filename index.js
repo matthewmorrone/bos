@@ -47,9 +47,9 @@ let USDollar = new Intl.NumberFormat('en-US', {
 });
 $(window).scroll(function() {
     // sticky header
-    let sticky = $('header'), scroll = $(window).scrollTop();
-    if (scroll > 0) sticky.addClass('fixed');
-    else sticky.removeClass('fixed');
+    // let sticky = $('header'), scroll = $(window).scrollTop();
+    // if (scroll > 0) sticky.addClass('fixed');
+    // else sticky.removeClass('fixed');
 
     // charity counter animation
     let hT = $('#charity').offset().top,
@@ -79,7 +79,7 @@ $(window).scroll(function() {
         }, 15)
         hasFired = true;
     }
-})
+}).scroll();
 
 // parallax image movement
 let currentZoom = 1; 
@@ -141,7 +141,7 @@ Math.easeInOutQuad = function(t, b, c, d) {
 
 $(() => {
     $.ajaxSetup({cache: false});
-    $("#splash video").width($("#splash").width())
+    $("#splash video").width($("#splash").width());
     loadTiles();
 
     // hide and show the menu on mobile
