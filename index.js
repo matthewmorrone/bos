@@ -86,13 +86,26 @@ let currentZoom = 1;
 let minZoom = 1; 
 let maxZoom = 2; 
 let stepSize = 0.005;
+let deviceWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+let mobileScrollDirection = 1;
+
+window.addEventListener('touchstart', function(e) {
+    start = e.changedTouches[0];
+});
+window.addEventListener('touchmove', function(e) {
+    let end = e.changedTouches[0];
+    mobileScrollDirection = end.screenY - start.screenY > 0 ? -1 : 1
+});
 
 function parallax(event) {
     let direction = event.deltaY > 0 ? 1 : -1; 
+    if (deviceWidth <= 600) direction = mobileScrollDirection;
     zoomImage(direction); 
 }
 ['wheel', 'scroll', 'touchmove']
     .forEach(event => document.querySelector('body').addEventListener(event, parallax, false));
+
+
 
 function zoomImage(direction) { 
     let newZoom = currentZoom + direction * stepSize; 
