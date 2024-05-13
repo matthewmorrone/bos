@@ -4,12 +4,9 @@
 
 ### Appearance
 + Smoother sticky header animation
-+ Tiny amount of phantom spacing between splash and charity counter
-+ Charity counter animation could be better
-+ Phantom border around parallax image
++ Phantom border around charity image
 + Model images have that extra border at the bottom. Either hide or modify images
-+ Mobile layout could use some work, especially the grids and the splash size. Menu currently hidden
-+ Charity animation not triggered on mobile until first scroll event
++ Parallax animation with touch interaction
 
 ### Under the Hood
 + Upgrade events section styling and loading to match other sections
@@ -22,3 +19,5 @@
 + Measurement of load times and implement lazy loading as necessary
 + Research and discussion towards an acceptable content management system
 + Implementation of SPA and routing
++ Instagram and SoundCloud feeds
++ Create dev subdomain on BOS site
