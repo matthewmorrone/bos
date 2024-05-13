@@ -16,4 +16,5 @@
 + Research and discussion towards an acceptable content management system
 + Implementation of SPA and routing
 + Instagram and SoundCloud feeds
++ Fewer entries on front page until loaded
 + Create dev subdomain on BOS site

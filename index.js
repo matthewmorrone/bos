@@ -56,13 +56,13 @@ $(window).scroll(function() {
         hH = $('#charity').outerHeight(),
         wH = $(window).height(),
         wS = $(this).scrollTop();
-    if (wS > (hT+hH-wH)) {
+    if (wS > (hT + hH - wH)) {
         if (hasFired) return;
         let start = Math.round(parseFloat($(".counter").attr("start")), 2);
         let current = Math.round(parseFloat($(".counter").attr("current")), 2);
         let end = Math.round(parseFloat($(".counter").attr("end")), 2);
         $(".counter").text(start);
-        
+
         let interval = setInterval(function() {
             let value = Math.round(parseFloat($(".counter").attr("current")), 2);
             if (value + increment <= end) {
@@ -82,9 +82,9 @@ $(window).scroll(function() {
 }).scroll();
 
 // parallax image movement
-let currentZoom = 1; 
-let minZoom = 1; 
-let maxZoom = 2; 
+let currentZoom = 1;
+let minZoom = 1;
+let maxZoom = 2;
 let stepSize = 0.005;
 let deviceWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 let mobileScrollDirection = 1;
@@ -98,23 +98,21 @@ window.addEventListener('touchmove', function(e) {
 });
 
 function parallax(event) {
-    let direction = event.deltaY > 0 ? 1 : -1; 
+    let direction = event.deltaY > 0 ? 1 : -1;
     if (deviceWidth <= 600) direction = mobileScrollDirection;
-    zoomImage(direction); 
+    zoomImage(direction);
 }
 ['wheel', 'scroll', 'touchmove']
     .forEach(event => document.querySelector('body').addEventListener(event, parallax, false));
 
-
-
-function zoomImage(direction) { 
-    let newZoom = currentZoom + direction * stepSize; 
-    if (newZoom < minZoom || newZoom > maxZoom) { 
-        return; 
-    } 
+function zoomImage(direction) {
+    let newZoom = currentZoom + direction * stepSize;
+    if (newZoom < minZoom || newZoom > maxZoom) {
+        return;
+    }
     currentZoom = newZoom;
-    let image = document.querySelector('#parallax'); 
-    image.style.transform = 'scale(' + currentZoom + ')'; 
+    let image = document.querySelector('#parallax');
+    image.style.transform = 'scale(' + currentZoom + ')';
 }
 
 // smooth scroll when clicking header links
