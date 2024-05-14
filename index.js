@@ -11,7 +11,6 @@ async function loadTiles() {
             </a>
         </div>`);
     });
-    $photosGrid.randomize();
 
     let models = await $get("models.csv");
     models = models.trim().split("\n").map(line => line.split(","));
@@ -25,7 +24,6 @@ async function loadTiles() {
             </a>
         </div>`);
     });
-    $modelGrid.randomize();
 
     let djs = await $get("djs.csv");
     djs = djs.trim().split("\n").map(line => line.split(","));
@@ -39,7 +37,6 @@ async function loadTiles() {
             </a>
         </div>`);
     });
-    $djGrid.randomize();
 
 }
 
