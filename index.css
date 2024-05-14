@@ -274,8 +274,14 @@ video::-webkit-media-controls {
     font-size: 50px;
 }
 .event h4 {
-    font-weight: normal;
-    letter-spacing: 1px;
+    font-family: "Helvetica", Sans-serif;
+    font-size: 1.125rem;
+    font-weight: 100;
+    text-transform: none;
+    font-style: normal;
+    text-decoration: none;
+    line-height: 1.625em;
+    letter-spacing: 0px;
 }
 
 .button-container {
