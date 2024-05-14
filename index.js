@@ -87,7 +87,6 @@ let minZoom = 1;
 let maxZoom = 2;
 let stepSize = 0.005;
 let deviceWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-alert(deviceWidth)
 let mobileScrollDirection = 1;
 
 window.addEventListener('touchstart', function(e) {
