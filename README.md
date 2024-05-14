@@ -3,6 +3,7 @@
 ## To-Do List
 
 ### Appearance
++ Replace TBA image with portrait version
 + Sticky header animation doesn't seem worth the trouble
 + Parallax animation on mobile doesn't work quite right
 

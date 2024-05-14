@@ -496,6 +496,7 @@ footer p {
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
+    text-align: justify;
 }
 footer span {
     text-align: center;
@@ -623,6 +624,10 @@ footer span {
         font-size: 20px;
         margin-top: unset;
     }
+    .emphasized {
+        width: unset;
+        margin: 10px;
+    }
     .emphasized img {
         width: -webkit-fill-available;
         object-fit: contain;
@@ -630,62 +635,89 @@ footer span {
     }
     .events-grid {
         grid-template-columns: repeat(1, 1fr);
+        width: unset;
+    }
+    .event {
+        margin: 10px;
     }
     #photos .grid {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        width: unset;
+    }
+    #photos .tile {
+        width: 120px;
+        height: 80px;
     }
     #models .grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        width: unset;
     }
     #models .tile {
         filter: none;
     }
-    #djs .grid {
-        grid-template-columns: repeat(4, 1fr);
-        width: unset;
+    #models .tile {
+        width: 120px;
     }
-    #djs .tile {
-        width: 80px;
-        height: 120px;
-        margin: 0px;
-    }
-    #djs .hover-text {
-        font-size: 10px !important;
-        overflow-wrap: break-word;
-    }
-
     #models h1 {
         font-size: 40px;
     }
     #models .grid {
         width: unset;
     }
+    #djs .grid {
+        grid-template-columns: repeat(4, 1fr);
+        width: unset;
+    }
     #djs .tile, #djs .tile img {
         width: 100px;
-        height: 261px;
+        height: 120px;
     }
+    /* 
+
+    #djs .tile, #djs .tile img {
+        height: 261px;
+    } */
+
+    #djs .hover-text {
+        font-size: 10px !important;
+        overflow-wrap: break-word;
+    }
+
     #partners-grid {
-        margin-left: 0px;
+        /* margin-left: 0px; */
+        width: 90%;
     }
     #partners-grid img {
         width: 100px !important;
     }
     #partners h1 {
         padding-top: 5px;
-        padding-left: 15px;
         padding-bottom: 5px;
+        text-align: center;
+    }
+    #board h1 {
+        padding-bottom: 0px;
     }
     #board .grid {
         grid-template-columns: repeat(2, 1fr);
     }
     #board .tile {
-        width: 200px;
+        width: 99%;
+        height: 100%;
+        margin: 1px;
+        border-radius: 0;
+    }
+    footer {
+        flex-flow: column nowrap;
     }
     footer h3 {
         font-size: 24px;
         text-align: center;
     }
     footer div {
-        width: 33%;
+        width: 80%;
+        margin: auto;
+        margin-top: 20px;
+        text-justify: auto;
     }
 }
