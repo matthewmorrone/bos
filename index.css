@@ -229,7 +229,7 @@ video::-webkit-media-controls {
 }
 .events-grid {
     display: grid;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
     width: 80%;
     margin: auto;
