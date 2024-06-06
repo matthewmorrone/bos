@@ -19,7 +19,6 @@ body {
     background-color: var(--back);
     color: var(--font);
 }
-
 a {
     color: white;
     text-decoration: none;
@@ -42,45 +41,13 @@ header {
     z-index: 999;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
-    /* animation-name: slideUp; */
 }
-/* 
-.fixed {
-    height: 75px;
-    animation-duration: .5s;
-    animation-name: slideDown;
-}
-.fixed #logo {
-    width: 95px; 
-    height: 58px;
-}
-@keyframes slideDown {
-    from {
-        height: 100px;
-    }
-    to {
-        height: 75px;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        height: 75px;
-    }
-    to {
-        height: 100px;
-    }
-}
- */
-
-
 #logo {
     width: 120px;
     height: 70px;
     margin-top: 15px;
     margin-left: 100px;
 }
-
 nav {
     font-size: 25px;
     font-weight: 700;
@@ -112,7 +79,6 @@ nav ul a {
     padding: 1em;
     color: var(--font);
 }
-
 .social {
     background-color: var(--trim);
     font-size: 15px;
@@ -206,7 +172,6 @@ video::-webkit-media-controls {
 #charity p {
     font-size: 19px;
 }
-
 .grid {
     display: grid;
     margin: auto;
@@ -219,15 +184,13 @@ video::-webkit-media-controls {
     border-radius: 20px;
     overflow: hidden;
 }
-
-
 #events {
     background-image: url("img/backgrounds/events-background.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
-.events-grid {
+#events .grid {
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);

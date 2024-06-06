@@ -1,5 +1,23 @@
 async function loadTiles() {
-    let photos = await $get("events.csv");
+
+    let events = await $get("events.csv");
+    events = events.trim().split("\n").map(line => line.split(","));
+    let $eventsGrid = $("#events .grid");
+    events.each(event => {
+        let [name, date, url, image] = [...event];
+        date = date.slice(1, -1)
+        date = luxon.DateTime.fromMillis(Date.parse(date)).toFormat("MMMM d, y")
+        $eventsGrid.append(`<div class="event">
+            <a href="${url}">
+                <img src="${image}" />
+                <h3>${name}</h3>
+                <h4>${date}</h4>
+                <button>Tickets</button>
+            </a>
+        </div>`);
+    });
+
+    let photos = await $get("photos.csv");
     photos = photos.trim().split("\n").map(line => line.split(","));
     let $photosGrid = $("#photos .grid");
     photos.each(photo => {
@@ -46,21 +64,17 @@ let USDollar = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
 });
-$(window).scroll(function() {
-    // sticky header
-    let sticky = $('header'), scroll = $(window).scrollTop();
-    if (scroll > 0) sticky.addClass('fixed');
-    else sticky.removeClass('fixed');
 
-    // charity counter animation
-    let hT = $('#charity').offset().top,
-        hH = $('#charity').outerHeight(),
-        wH = $(window).height(),
-        wS = $(this).scrollTop();
-    if (wS > (hT + hH - wH)) {
+$(window).scroll(function() {
+    function elementScrolled(elem) {
+        let docViewTop = $(window).scrollTop();
+        let docViewBottom = docViewTop + $(window).height();
+        let elemTop = $(elem).offset().top;
+        return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
+    }
+    if (elementScrolled('#charity')) {
         if (hasFired) return;
         let start = Math.round(parseFloat($(".counter").attr("start")), 2);
-        let current = Math.round(parseFloat($(".counter").attr("current")), 2);
         let end = Math.round(parseFloat($(".counter").attr("end")), 2);
         $(".counter").text(start);
 
@@ -77,10 +91,18 @@ $(window).scroll(function() {
             else {
                 clearInterval(interval);
             }
-        }, 15)
+        }, 15);
         hasFired = true;
     }
-}).scroll();
+});
+// TODO: sticky header
+/*
+$(window).scroll(function() {
+    let sticky = $('header'), scroll = $(window).scrollTop();
+    if (scroll > 0) sticky.addClass('fixed');
+    else sticky.removeClass('fixed');
+});
+*/
 
 // parallax image movement
 let currentZoom = 1;

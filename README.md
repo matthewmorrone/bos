@@ -5,11 +5,9 @@
 ### Appearance
 + Replace TBA image with portrait version
 + Sticky header animation doesn't seem worth the trouble
-+ Parallax animation on mobile doesn't work quite right
++ Parallax animation should be slower and more chaotic
 
 ### Under the Hood
-+ Upgrade styling and loading of events section to match other sections
-+ Newsletter signup doesn't seem to do anything?
 + Optimize and clean up code
 + Decide what to host and what to grab from CDNs
 
