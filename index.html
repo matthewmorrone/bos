@@ -17,59 +17,71 @@
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
 <script>
-// smooth scroll when clicking header links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        const offsetTop = target.offsetTop - $("header").height();
-        scrollTo(document.documentElement, offsetTop, 600);
-        router.navigateTo(this.getAttribute('href'));
+$(() => {
+    // smooth scroll when clicking header links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            const offsetTop = target.offsetTop - $("header").height();
+            scrollTo(document.documentElement, offsetTop, 600);
+            window.location.hash = this.getAttribute('href');
+        });
     });
 });
-async function getPost(name) {
+async function getPosts(type) {
     let result = await $.ajax({
         url: 'wordpress/wp.php',
         type: 'POST',
         dataType: "json",
         data: {
-            action : 'is_page',
-            post_name : name
+            action : `${type}`
         }
     });
-    return result[0];
+    return result;
+}
+function shouldNotIntercept(navigationEvent) {
+    return (!navigationEvent.canIntercept 
+          || navigationEvent.hashChange 
+          || navigationEvent.downloadRequest 
+          || navigationEvent.formData
+    );
 }
 
-navigation.addEventListener('navigate', async navigateEvent => {
-    navigateEvent.preventDefault();
-    // if (shouldNotIntercept(navigateEvent)) return;
-    const url = new URL(navigateEvent.destination.url);
+navigation.addEventListener("navigate", async event => {
+    if (shouldNotIntercept(event)) return;
+    const url = new URL(event.destination.url);
     const path = url.href.split("/").slice(-1)[0];
-    let result = await getPost(path);
+    console.log(path);
 
-    if (url.pathname === '/') {
-        navigateEvent.intercept({handler: loadHome});
-    }
-    else if (result) {
-        // navigateEvent.intercept({handler: loadPost(result)});
-        loadPost(result);
-        navigation.navigate(result.post_name);
 
-    }
+    event.intercept({
+        async handler() {
+            let result = await getPosts(path);
+            console.log(result);
+            if (result) {
+                loadPost(result[0]);
+            }
+            else {
+                loadHome();
+            }
+        },
+    });
+
 });
 
+
 function loadHome() {
-    $("#splash, #charity, #events, #photos, #models, #djs, #board").show();
+    $("#splash, #charity, #events, #galleries, #models, #djs, #board").show();
     $("#content").hide();
     $('title').text("BOS Philly - Bringing Circuit Back to Philly");
-    
 }
 function loadPost(result) {
     console.log(result);
-    $("#splash, #charity, #events, #photos, #models, #djs, #board").hide();
+    $("#splash, #charity, #events, #galleries, #models, #djs, #board").hide();
     $("#content").show();
     $("#content").html(result.post_content);
-    $('title').text(`${result.post_title} - BOS Philly`);
+    // $('title').text(`${result.post_title} - BOS Philly`);
 }
 
 </script>
@@ -83,10 +95,10 @@ function loadPost(result) {
     <nav>
         <ul>
             <li><a href="#events">Events</a></li>
-            <li><a href="#photos">Photos</a></li>
-            <li><a href="#models">Ambassadors</a></li>
+            <li><a href="#galleries">Galleries</a></li>
+            <li><a href="#models">Models</a></li>
             <li><a href="#djs">DJs</a></li>
-            <li><a href="#board">About</a></li>
+            <li><a href="#board">Board</a></li>
         </ul>
         <span>
             <a class='social' href="http://facebook.com/bosphilly" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -124,18 +136,18 @@ function loadPost(result) {
         <a href="events"><button class="more">More Events</button></a>
     </div>
 </section>
-<section id="photos">
-    <h1>Photos</h1>
+<section id="galleries">
+    <h1>Galleries</h1>
     <div class="grid"></div>
     <div class="button-container">
-        <a href="photos"><button class="more">More Galleries</button></a>
+        <a href="galleries"><button class="more">More Galleries</button></a>
     </div>
 </section>
 <section id="models">
-    <h1>Ambassadors</h1>
+    <h1>Models</h1>
     <div class="grid"></div>
     <div class="button-container">
-        <a href="models"><button class="more">More Ambassadors</button></a>
+        <a href="models"><button class="more">More Models</button></a>
     </div>
 </section>
 <section id="djs">

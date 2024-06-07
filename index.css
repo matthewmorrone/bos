@@ -277,17 +277,17 @@ button {
     color: var(--font);
 }
 
-#photos .grid {
+#galleries .grid {
     grid-template-columns: repeat(3, 1fr);
 }
-#photos .tile {
+#galleries .tile {
     width: 350px;
     height: 231px;
     text-align: center;
     justify-self: center;
     align-self: center;
 }
-#photos .tile img {
+#galleries .tile img {
     width: 350px;
     height: 231px;
     object-fit: cover;
@@ -608,11 +608,11 @@ footer span, footer a {
     .event {
         margin: 10px;
     }
-    #photos .grid {
+    #galleries .grid {
         grid-template-columns: repeat(3, 1fr);
         width: unset;
     }
-    #photos .tile {
+    #galleries .tile {
         width: 120px;
         height: 80px;
     }

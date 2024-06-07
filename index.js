@@ -17,12 +17,12 @@ async function loadTiles() {
         </div>`);
     });
 
-    let photos = await $get("photos.csv");
-    photos = photos.trim().split("\n").map(line => line.split(","));
-    let $photosGrid = $("#photos .grid");
-    photos.each(photo => {
-        let [event, url, image] = [...photo]
-        $photosGrid.append(`<div class="tile container">
+    let galleries = await $get("galleries.csv");
+    galleries = galleries.trim().split("\n").map(line => line.split(","));
+    let $galleriesGrid = $("#galleries .grid");
+    galleries.each(gallery => {
+        let [event, url, image] = [...gallery]
+        $galleriesGrid.append(`<div class="tile container">
             <a href="${url}">
                 <img src="${image}" class="hover" />
                 <div class="overlay"><div class="hover-text">${event}</div></div>

@@ -1,6 +1,11 @@
 # BOS
 
 ## To-Do List
++ Implement loading of fields when getting a post via ajax
++ Add fields for models, djs, galleries
++ Ensure images are associated with proper posts
++ Render and style pages: might need to rethink routing
++ Possibly reimport posts with custom fields
 
 ### Appearance
 + Replace TBA image with portrait version
@@ -8,12 +13,9 @@
 + Parallax animation should be slower and more chaotic
 
 ### Under the Hood
-+ Optimize and clean up code
-+ Decide what to host and what to grab from CDNs
++ Research best practices for not committing wordpress to github
++ Do something about version control for customizations done to wordpress as well as its actual content
 
 ### Next Steps
-+ Research and discussion towards an acceptable content management system
-+ Implementation of SPA and routing
 + Instagram and SoundCloud feeds
 + Fewer entries on front page until loaded
-+ Create dev subdomain on BOS site
