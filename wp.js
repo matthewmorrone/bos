@@ -1,27 +1,53 @@
-
-$.ajax({
-    type: 'POST',
-    url: 'wordpress/wp.php',
-    dataType: "json",
-    data: {action : 'get_ajax_posts'},
-    success: function(response) {
-        $.each(response, function(key, value) {
-            console.log(key, value);
+async function getPages(action) {
+    let result;
+    try {
+        result = await $.ajax({
+            url: 'wordpress/wp.php',
+            type: 'POST',
+            dataType: "json",
+            data: {
+                action: action
+            }
         });
     }
-});
-
-$.ajax({
-    type: 'POST',
-    url: 'wordpress/wp.php',
-    dataType: "json",
-    data: {
-        action : 'is_page',
-        post_name : 'sunkiss'
-    },
-    success: function(response) {
-        $.each(response, function(key, value) {
-            console.log(key, value);
+    catch (error) {
+        console.error(error);
+    }
+    return result;
+}
+async function getPageById(action, id) {
+    let result;
+    try {
+        result = await $.ajax({
+            url: 'wordpress/wp.php',
+            type: 'POST',
+            dataType: "json",
+            data: {
+                action: action,
+                id: id
+            }
         });
     }
-});
+    catch (error) {
+        console.error(error);
+    }
+    return result;
+}
+async function getPageByName(action, name) {
+    let result;
+    try {
+        result = await $.ajax({
+            url: 'wordpress/wp.php',
+            type: 'POST',
+            dataType: "json",
+            data: {
+                action: action,
+                name: name
+            }
+        });
+    }
+    catch (error) {
+        console.error(error);
+    }
+    return result;
+}

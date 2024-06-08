@@ -28,7 +28,7 @@ Object.prototype.define("size", function () {
 });
 Object.prototype.define("each", function (fn) {
     for (let k in this) {
-        fn && this.hasProperty(k) && fn.call(this, this[k], k);
+        fn /* && this.hasProperty(k) */ && fn.call(this, this[k], k);
     }
     return this;
 });

@@ -8,14 +8,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <link rel="icon" href="https://bosphilly.com/wp-content/uploads/2022/08/android-chrome-512x512-1-75x75.png" sizes="32x32">
 <link rel="icon" href="https://bosphilly.com/wp-content/uploads/2022/08/android-chrome-512x512-1-300x300.png" sizes="192x192">
 <link rel="apple-touch-icon" href="https://bosphilly.com/wp-content/uploads/2022/08/android-chrome-512x512-1-300x300.png">
-<link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
+<script src="//unpkg.com/navigo"></script>
+<script src="wp.js"></script>
 <script>
 $(() => {
     // smooth scroll when clicking header links
@@ -29,63 +31,37 @@ $(() => {
         });
     });
 });
-async function getPosts(type) {
-    let result = await $.ajax({
-        url: 'wordpress/wp.php',
-        type: 'POST',
-        dataType: "json",
-        data: {
-            action : `${type}`
-        }
-    });
-    return result;
-}
-function shouldNotIntercept(navigationEvent) {
-    return (!navigationEvent.canIntercept 
-          || navigationEvent.hashChange 
-          || navigationEvent.downloadRequest 
-          || navigationEvent.formData
-    );
-}
 
-navigation.addEventListener("navigate", async event => {
-    if (shouldNotIntercept(event)) return;
-    const url = new URL(event.destination.url);
-    const path = url.href.split("/").slice(-1)[0];
-    console.log(path);
+const router = new Navigo('/bos');
+router.on("/", async (match) => {
+    $('title').text(`BOS Philly - Bringing Circuit Back to Philly`);
 
-
-    event.intercept({
-        async handler() {
-            let result = await getPosts(path);
-            console.log(result);
-            if (result) {
-                loadPost(result[0]);
-            }
-            else {
-                loadHome();
-            }
-        },
-    });
-
-});
-
-
-function loadHome() {
     $("#splash, #charity, #events, #galleries, #models, #djs, #board").show();
     $("#content").hide();
-    $('title').text("BOS Philly - Bringing Circuit Back to Philly");
-}
-function loadPost(result) {
-    console.log(result);
+})
+.on("/:page", async (match) => {
+    console.log(match.data.page);
+    $('title').text(`${match.data.page.toTitleCase()} - BOS Philly`);
+
     $("#splash, #charity, #events, #galleries, #models, #djs, #board").hide();
     $("#content").show();
-    $("#content").html(result.post_content);
-    // $('title').text(`${result.post_title} - BOS Philly`);
-}
+
+    let result = await getPages(match.data.page);
+    console.log(result);
+})
+.on("/:page/:name", async (match) => {
+    console.log(match.data.page, match.data.name);
+    $('title').text(`${match.data.name.toTitleCase()} - BOS Philly`);
+
+    $("#splash, #charity, #events, #galleries, #models, #djs, #board").hide();
+    $("#content").show();
+
+    let result = await getPageByName(match.data.page, match.data.name);
+    console.log(result);
+})
+.resolve();
 
 </script>
-<script src="utils.js"></script>
 </head>
 <body>
 <header class="fixed">
@@ -237,6 +213,7 @@ function loadPost(result) {
         <p><a class='learn-more' href="https://www.bosphilly.com/board/">Learn more about us >></a></p>
     </div>
 </footer>
+<script src="utils.js"></script>
 <script src="index.js"></script>
 </body>
 </html>
