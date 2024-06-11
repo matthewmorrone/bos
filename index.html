@@ -244,12 +244,15 @@ $(async () => {
                 </div>
                 `;
                 $("#content").html(event_template);
-                $("#content > div").css("background-image", `url('${data.image}')`)
-            }
-            if (qs.page === "galleries") {
+                $("#content > div").css("background-image", `url('${data.image}')`);
+                $("title").text(`${data.post_title} - BOS Philly`);
 
             }
+            if (qs.page === "galleries") {
+                
+            }
             if (qs.page === "models") {
+                console.log(result);
                 data.post_title = result.post_title;
                 data.post_name = result.post_name;
                 data.image = result.image;
@@ -261,18 +264,24 @@ $(async () => {
                 data.gallery = result.fields.photo_gallery;
 
                 let model_template = `
-                <h2>${data.post_title}</h2>
-                <h3>${data.hometown}</h3>
-                <h4>${data.height}</h4>
-                <h4>${data.weight}</h4>
-                <img src='${data.image}' class='feature' />
-                <p>${data.post_content}</p>
-                <p><a href="${data.instagram}">${data.instagram}</a></p>
-                <div class='gallery'>
-                ${data.gallery.map(img => `<img src='${img.thumbnail_image_url}' />`).join("")}
+                <div class='models'>
+                    <div>
+                        <img src='${data.image}' class='feature' />
+                    </div>
+                    <div>
+                        <h1>${data.post_title}</h1>
+                        <h3>Height: ${data.height}</h3>
+                        <h3>Weight: ${data.weight}</h3>
+                        <p>${data.post_content}</p>
+                        <button class='instagram'><a href="https://www.instagram.com/${data.instagram}/" target="_blank"><i class="fab fa-instagram"></i> ${data.instagram}</a></button>
+                        <div>
+                            ${data.gallery.map(img => `<img src='${img.thumbnail_image_url}' data-lightbox='${data.post_name}' />`).join("")}
+                        </div>
+                    </div>
                 </div>
                 `;
                 $("#content").html(model_template);
+                $("title").text(`${data.post_title} - BOS Philly`);
             }
             if (qs.page === "djs") {
                 data.post_title = result.post_title;
@@ -285,16 +294,32 @@ $(async () => {
                 data.soundcloud_link = result.fields.soundcloud_link;
 
                 let dj_template = `
-                <img src='${data.logo}' class='logo' />
-                <h2>${data.post_title}</h2>
-                <h3>${data.hometown}</h3>
-                <img src='${data.image}' class='feature' />
-                <p>${data.post_content}</p>
-                <p><a href="${data.soundcloud_link}" class="sc-player">${data.post_title}'s SoundCloud</a></p>
-                <div class='gallery'>
-                ${data.gallery.map(img => `<img src='${img.thumbnail_image_url}' />`).join("")}
-                </div>                `;
+                <div class='djs'>
+                    <div>
+                        <div class='banner'>
+                            <img src='${data.logo}' class='logo' />
+                        </div>
+                    </div>
+                    <div class='dj-info'>
+                        <div class='dj-info-columns'>
+                            <div>
+                                <img src='${data.image}' class='feature' />
+                                <div class='gallery'>
+                                    ${data.gallery.map(img => `<img src='${img.thumbnail_image_url}' />`).join("")}
+                                </div>
+                            </div>
+                            <div>
+                                <h2>${data.post_title}</h2>
+                                <h3>${data.hometown}</h3>
+                                <p>${data.post_content}</p>
+                                <button class='soundcloud'><a href="${data.soundcloud_link}"><i class="fa-brands fa-soundcloud"></i> ${data.post_title}</a></button>                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
                 $("#content").html(dj_template);
+                $("title").text(`${data.post_title} - BOS Philly`);
             }
         }
         else if (qs.page) {
@@ -318,6 +343,7 @@ if (!$.isEmptyObject(qs)) {
         if (qs.page === "djs")       $("#djs").show().addClass("first-section");
         if (qs.page === "board")     $("#board").show().addClass("first-section");
         $(".more").hide();
+        $("title").text(`${qs.page} - BOS Philly`);
     }
 }
 

@@ -385,6 +385,54 @@ button {
     background-position: bottom center;
     background-size: cover;
 }
+.models {
+    background-image: url("img/backgrounds/model-background.png");
+    background-position: bottom center;
+    background-size: cover;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+.models > div {
+    width: 40%;
+}
+.instagram {
+    background-color: var(--fore);
+    margin: 20px;
+    padding: 20px;
+}
+.instagram i {
+    vertical-align: middle;
+}
+
+.banner {
+    background-color: var(--trim);
+}
+.banner img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: scale-down;
+    margin: 20px;
+}
+.dj-info-columns {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin: 20px;
+}
+.dj-info-columns > div {
+    width: 40%;
+}
+.dj-info-columns p {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 24px;
+}
+.soundcloud {
+    background-color: #ff7700;
+    font-size: 24px;
+}
 
 .content-container {
     width: 70%;
@@ -656,6 +704,9 @@ footer span, footer a {
     #events .grid {
         grid-template-columns: repeat(1, 1fr);
         width: unset;
+    }
+    .models, .djs {
+        flex-flow: column nowrap;
     }
     .event {
         margin: 10px;

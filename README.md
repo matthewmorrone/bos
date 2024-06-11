@@ -1,7 +1,7 @@
 # BOS
 
 ## To-Do List
-+ Style model and DJ pages
++ Remove hover and put titles under
 + Import, implement and style gallery pages
 + Make SPA implementation more efficient
 
@@ -10,6 +10,7 @@
 + Research best practices for not committing wordpress to github
 
 ### Appearance
++ SoundCloud and Lightbox Plugins
 + Replace TBA image with portrait version
 + Sticky header animation doesn't seem worth the trouble
 + Parallax animation should be slower and more chaotic
@@ -19,4 +20,4 @@
 + Consider merging events and galleries categories
 + Instagram and SoundCloud feeds
 + Fewer entries on front page until loaded
-+ Events have a preview image when linked to in iMessage
++ Events should have a preview image when linked to in iMessage
