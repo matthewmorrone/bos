@@ -1,8 +1,10 @@
 # BOS
 
 ## To-Do List
-+ Ensure images are associated with proper posts
-+ Render and style pages: might need to rethink routing
++ Render and style pages
++ URL rewrite
++ Decide implementation of URL routing and SPA
+
 
 ### Appearance
 + Replace TBA image with portrait version
@@ -10,10 +12,11 @@
 + Parallax animation should be slower and more chaotic
 
 ### Under the Hood
++ Eliminate use of CSVs
 + Research best practices for not committing wordpress to github
-+ Do something about version control for customizations done to wordpress as well as its actual content
 
 ### Next Steps
++ Ensure images are associated with proper posts: galleries
 + Consider merging events and galleries categories
 + Instagram and SoundCloud feeds
 + Fewer entries on front page until loaded

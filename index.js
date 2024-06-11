@@ -8,7 +8,7 @@ async function loadTiles() {
         date = date.slice(1, -1)
         date = luxon.DateTime.fromMillis(Date.parse(date)).toFormat("MMMM d, y")
         $eventsGrid.append(`<div class="event">
-            <a href="${url}" data-navigo>
+            <a href="${url}">
                 <img src="${image}" />
                 <h3>${name}</h3>
                 <h4>${date}</h4>
@@ -23,7 +23,7 @@ async function loadTiles() {
     galleries.each(gallery => {
         let [event, url, image] = [...gallery]
         $galleriesGrid.append(`<div class="tile container">
-            <a href="${url}" data-navigo>
+            <a href="${url}">
                 <img src="${image}" class="hover" />
                 <div class="overlay"><div class="hover-text">${event}</div></div>
             </a>
@@ -36,7 +36,7 @@ async function loadTiles() {
     models.each(model => {
         let [event, url, image] = [...model]
         $modelGrid.append(`<div class="tile container">
-            <a href="${url}" data-navigo>
+            <a href="${url}">
                 <img src="${image}" class="hover" />
                 <div class="overlay"><div class="hover-text">${event}</div></div>
             </a>
@@ -49,7 +49,7 @@ async function loadTiles() {
     djs.each(dj => {
         let [event, url, image] = [...dj]
         $djGrid.append(`<div class="tile container">
-            <a href="${url}" data-navigo>
+            <a href="${url}">
                 <img src="${image}" class="hover" />
                 <div class="overlay"><div class="hover-text">${event}</div></div>
             </a>
@@ -171,4 +171,6 @@ $(() => {
     // hide and show the menu on mobile
     $("#mobileToggle").click(() => $("nav ul").slideToggle());
 });
+
+
 

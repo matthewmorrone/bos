@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=.9, viewport-fit=cover">
+<base href="/bos/" />
 <title>BOS Philly - Bringing Circuit Back to Philly</title>
 <link rel="stylesheet" href="index.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -16,65 +17,20 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
-<script src="//unpkg.com/navigo"></script>
 <script src="wp.js"></script>
-<script>
-$(() => {
-    // smooth scroll when clicking header links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            const offsetTop = target.offsetTop - $("header").height();
-            scrollTo(document.documentElement, offsetTop, 600);
-            window.location.hash = this.getAttribute('href');
-        });
-    });
-});
-
-const router = new Navigo('/bos');
-router.on("/", async (match) => {
-    $('title').text(`BOS Philly - Bringing Circuit Back to Philly`);
-
-    $("#splash, #charity, #events, #galleries, #models, #djs, #board").show();
-    $("#content").hide();
-})
-.on("/:page", async (match) => {
-    console.log(match.data.page);
-    $('title').text(`${match.data.page.toTitleCase()} - BOS Philly`);
-
-    $("#splash, #charity, #events, #galleries, #models, #djs, #board").hide();
-    $("#content").show();
-
-    let result = await getPages(match.data.page);
-    console.log(result);
-})
-.on("/:page/:name", async (match) => {
-    console.log(match.data.page, match.data.name);
-    $('title').text(`${match.data.name.toTitleCase()} - BOS Philly`);
-
-    $("#splash, #charity, #events, #galleries, #models, #djs, #board").hide();
-    $("#content").show();
-
-    let result = await getPageByName(match.data.page, match.data.name);
-    console.log(result);
-})
-.resolve();
-
-</script>
 </head>
 <body>
 <header class="fixed">
-    <a href="http://bosphilly.com">
+    <a href="/bos/">
         <img id="logo" src="https://bosphilly.com/wp-content/uploads/2021/03/162528690_3841567515927956_3033548685814258535_n-2-e1616116421988-1024x620.png" alt="BOS Logo">
     </a>
     <nav>
         <ul>
-            <li><a href="#events">Events</a></li>
-            <li><a href="#galleries">Galleries</a></li>
-            <li><a href="#models">Models</a></li>
-            <li><a href="#djs">DJs</a></li>
-            <li><a href="#board">Board</a></li>
+            <li><a href="events">Events</a></li>
+            <li><a href="galleries">Galleries</a></li>
+            <li><a href="models">Models</a></li>
+            <li><a href="djs">DJs</a></li>
+            <li><a href="board">Board</a></li>
         </ul>
         <span>
             <a class='social' href="http://facebook.com/bosphilly" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -215,5 +171,156 @@ router.on("/", async (match) => {
 </footer>
 <script src="utils.js"></script>
 <script src="index.js"></script>
+<script>
+$(async () => {
+    // smooth scroll when clicking header links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            const offsetTop = target.offsetTop - $("header").height();
+            scrollTo(document.documentElement, offsetTop, 600);
+            window.location.hash = this.getAttribute('href');
+        });
+    });
+
+    let qs = query();
+    if (!$.isEmptyObject(qs)) {
+        let result, data = {};
+        if (qs.page && qs.name) {
+            result = await getPageByName(qs.page, qs.name);
+            if (qs.page === "events") {
+                console.log(result);
+                data.post_title = result.post_title;
+                data.post_name = result.post_name;
+                data.post_content = result.post_content;
+                data.image = result.image;
+                data.start_time = result.fields.start_time ?? "";
+                data.end_time = result.fields.end_time ?? "";
+                data.venue_name = result.fields.venue_name ?? "";
+                data.venue_address = result.fields.venue_address ?? "";
+                data.ticket_price = result.fields.ticket_price ?? "";
+                data.ticket_link = result.fields.ticket_link ?? "";
+                data.date_of_event = result.fields.date_of_event ?? "";
+                data.dj_name = result.fields.dj.post_title ?? "";
+                data.dj_image = result.fields.dj_image ?? "";
+                data.dj_url = "djs/"+result.fields.dj.post_name ?? "";
+                data.more_djs = result.fields.more_djs ?? "";
+                console.log(data);
+                let event_template = `
+                <div class='content-container'>
+                    <div class='shade'>
+                        <div class='title'>
+                            <h1>${data.post_title}</h1>
+                        </div>
+                        <div class='images'>
+                            <div>
+                                <img src='${data.dj_image}' class='feature' />
+                                <h2><a href="${data.dj_url}">${data.dj_name}</a></h2>    
+                            </div>
+                            <img src='${data.image}' class='feature' />
+                        </div>
+                        <div class='info'>
+                            <div>
+                                <h2><i class='fas fa-ticket-alt'></i> Tickets</h2>
+                                <p>$${data.ticket_price}</p>
+                                <a href='${data.ticket_link}'><button>Tickets</button></a>
+                            </div>
+                            <div>
+                                <h2><i class='far fa-clock'></i> Time</h2>
+                                <p>${data.date_of_event}</p>
+                                <p>${data.start_time} - ${data.end_time}</p>
+                                </div>
+                            <div>
+                                <h2><i class="fas fa-map-marker-alt"></i> Location</h2>
+                                <h4>${data.venue_name}</h4>
+                                <p><a href='http://maps.google.com/?q="${data.venue_address}"'>${data.venue_address}</a></p>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <a href="events"><button class="more">More Events</button></a>
+                        </div>
+                    </div>
+                </div>
+                `;
+                $("#content").html(event_template);
+                $("#content > div").css("background-image", `url('${data.image}')`)
+            }
+            if (qs.page === "galleries") {
+
+            }
+            if (qs.page === "models") {
+                data.post_title = result.post_title;
+                data.post_name = result.post_name;
+                data.image = result.image;
+                data.post_content = result.post_content;
+                data.hometown = result.fields.hometown;
+                data.instagram = result.fields.instagram;
+                data.height = result.fields.height;
+                data.weight = result.fields.weight;
+                data.gallery = result.fields.photo_gallery;
+
+                let model_template = `
+                <h2>${data.post_title}</h2>
+                <h3>${data.hometown}</h3>
+                <h4>${data.height}</h4>
+                <h4>${data.weight}</h4>
+                <img src='${data.image}' class='feature' />
+                <p>${data.post_content}</p>
+                <p><a href="${data.instagram}">${data.instagram}</a></p>
+                <div class='gallery'>
+                ${data.gallery.map(img => `<img src='${img.thumbnail_image_url}' />`).join("")}
+                </div>
+                `;
+                $("#content").html(model_template);
+            }
+            if (qs.page === "djs") {
+                data.post_title = result.post_title;
+                data.post_name = result.post_name;
+                data.image = result.image;
+                data.post_content = result.post_content;
+                data.hometown = result.fields.hometown;
+                data.gallery = result.fields.galery;
+                data.logo = result.fields.logo.url;
+                data.soundcloud_link = result.fields.soundcloud_link;
+
+                let dj_template = `
+                <img src='${data.logo}' class='logo' />
+                <h2>${data.post_title}</h2>
+                <h3>${data.hometown}</h3>
+                <img src='${data.image}' class='feature' />
+                <p>${data.post_content}</p>
+                <p><a href="${data.soundcloud_link}" class="sc-player">${data.post_title}'s SoundCloud</a></p>
+                <div class='gallery'>
+                ${data.gallery.map(img => `<img src='${img.thumbnail_image_url}' />`).join("")}
+                </div>                `;
+                $("#content").html(dj_template);
+            }
+        }
+        else if (qs.page) {
+            // result = await getPages(qs.page);
+        }
+    }
+});
+
+
+let qs = query();
+if (!$.isEmptyObject(qs)) {
+    if (qs.page && qs.name) {
+        $("#splash, #charity, #events, #galleries, #models, #djs, #board").hide();
+        $("#content").show().addClass("first-section");
+    }
+    else if (qs.page) {
+        $("#splash, #charity, #events, #galleries, #models, #djs, #board").hide();
+        if (qs.page === "events")    $("#events").show().addClass("first-section");
+        if (qs.page === "galleries") $("#galleries").show().addClass("first-section");
+        if (qs.page === "models")    $("#models").show().addClass("first-section");
+        if (qs.page === "djs")       $("#djs").show().addClass("first-section");
+        if (qs.page === "board")     $("#board").show().addClass("first-section");
+        $(".more").hide();
+    }
+}
+
+</script>
 </body>
 </html>

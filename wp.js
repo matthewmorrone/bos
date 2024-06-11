@@ -2,7 +2,7 @@ async function getPages(action) {
     let result;
     try {
         result = await $.ajax({
-            url: 'wordpress/wp.php',
+            url: 'wp.php',
             type: 'POST',
             dataType: "json",
             data: {
@@ -19,7 +19,7 @@ async function getPageById(action, id) {
     let result;
     try {
         result = await $.ajax({
-            url: 'wordpress/wp.php',
+            url: 'wp.php',
             type: 'POST',
             dataType: "json",
             data: {
@@ -37,7 +37,7 @@ async function getPageByName(action, name) {
     let result;
     try {
         result = await $.ajax({
-            url: 'wordpress/wp.php',
+            url: 'wp.php',
             type: 'POST',
             dataType: "json",
             data: {

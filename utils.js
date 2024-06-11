@@ -159,6 +159,24 @@ function jsonToTableRow(data, id, ex) {
     return result;
 }
 
+function query() {
+    let qs = {}
+    let [page, name] = [...window.location.pathname.split("/").slice(2)]
+    qs.page = page, qs.name = name;
+    return qs;
+}
+/*
+function query() {
+    let qs = document.location.search;
+    qs = qs.split('+').join(' ');
+    let params = {}, tokens, re = /[?&]?([^=]+)=([^&]*)/g;
+    while (tokens = re.exec(qs)) {
+        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+    }
+    return params;
+}
+*/
+
 (function($) {
     $.fn.randomize = function (tree, childElem) {
         return this.each(function() {
