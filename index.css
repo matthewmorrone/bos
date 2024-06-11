@@ -689,19 +689,20 @@ footer span, footer a {
         width: 90px;
         height: 120px;
     }
-    /* 
-
-    #djs .tile, #djs .tile img {
-        height: 261px;
-    } */
 
     #djs .hover-text {
         font-size: 10px !important;
         overflow-wrap: break-word;
     }
+    #content .images, #content .info {
+        flex-flow: column-reverse nowrap !important;
+    }
+    #content .feature {
+        width: 100%;
+    }
+
 
     #partners-grid {
-        /* margin-left: 0px; */
         width: 90%;
     }
     #partners-grid img {

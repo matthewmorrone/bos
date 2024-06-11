@@ -1,19 +1,18 @@
 # BOS
 
 ## To-Do List
-+ Render and style pages
-+ URL rewrite
-+ Decide implementation of URL routing and SPA
++ Style model and DJ pages
++ Import, implement and style gallery pages
++ Make SPA implementation more efficient
 
+### Under the Hood
++ Eliminate use of CSVs
++ Research best practices for not committing wordpress to github
 
 ### Appearance
 + Replace TBA image with portrait version
 + Sticky header animation doesn't seem worth the trouble
 + Parallax animation should be slower and more chaotic
-
-### Under the Hood
-+ Eliminate use of CSVs
-+ Research best practices for not committing wordpress to github
 
 ### Next Steps
 + Ensure images are associated with proper posts: galleries
