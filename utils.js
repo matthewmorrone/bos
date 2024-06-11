@@ -160,8 +160,9 @@ function jsonToTableRow(data, id, ex) {
 }
 
 function query() {
-    let qs = {}
-    let [page, name] = [...window.location.pathname.split("/").slice(2)]
+    let qs = {}, slice = 1;
+    if (window.location.pathname.startsWith("/bos")) slice = 2;
+    let [page, name] = [...window.location.pathname.split("/").slice(slice)]
     qs.page = page, qs.name = name;
     return qs;
 }
