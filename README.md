@@ -4,7 +4,6 @@
 + Remove hover and put titles under
 + Import, implement and style gallery pages
 + Make SPA implementation more efficient
-+ Base tag, logo link and router need server contingencies
 
 ### Under the Hood
 + Eliminate use of CSVs
