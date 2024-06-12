@@ -28,7 +28,7 @@ img {
 }
 header {
     height: 100px;
-    background-image: url("wordpress/wp-content/uploads/2024/06/header.png");
+    background-image: url("wordpress/wp-content/uploads/header.png");
     background-position: top;
     background-size: cover;
     border-bottom: 2px solid var(--trim);
@@ -163,7 +163,7 @@ video::-webkit-media-controls {
 #parallax {
     height: 100%;
     width: 100%;
-    background-image: url("wordpress/wp-content/uploads/2024/06/charity-parallax.png");
+    background-image: url("wordpress/wp-content/uploads/charity-parallax.png");
     background-position: center;
     background-size: cover;
 }
@@ -187,7 +187,7 @@ video::-webkit-media-controls {
     overflow: hidden;
 }
 #events {
-    background-image: url("wordpress/wp-content/uploads/2024/06/events-background.jpeg");
+    background-image: url("wordpress/wp-content/uploads/events-background.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -315,7 +315,7 @@ button {
 
 
 #djs {
-    background-image: url("wordpress/wp-content/uploads/2024/06/djs-background.jpeg");
+    background-image: url("wordpress/wp-content/uploads/djs-background.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -379,14 +379,14 @@ button {
 }
 
 #models {
-    background-image: url("wordpress/wp-content/uploads/2024/06/polka-dots.png");
+    background-image: url("wordpress/wp-content/uploads/polka-dots.png");
     text-align: left;
     letter-spacing: 3px;
     background-position: bottom center;
     background-size: cover;
 }
 .models {
-    background-image: url("wordpress/wp-content/uploads/2024/06/model-background.jpg");
+    background-image: url("wordpress/wp-content/uploads/model-background.jpg");
     background-position: bottom center;
     background-size: cover;
     display: flex;
@@ -482,7 +482,7 @@ button {
     object-fit: cover;
 }
 #partners .title {
-    background-image: url("wordpress/wp-content/uploads/2024/06/polka-dots.png");
+    background-image: url("wordpress/wp-content/uploads/polka-dots.png");
     text-align: left;
     letter-spacing: 3px;
     background-position: bottom center;
@@ -520,7 +520,7 @@ button {
 }
 footer {
     height: 50%;
-    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("wordpress/wp-content/uploads/2024/06/footer.png");
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("wordpress/wp-content/uploads/footer.png");
     background-position: center;
     background-size: cover;
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .2);

@@ -4,11 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=.9, viewport-fit=cover">
 <base href="/" />
-<script>
-if (window.location.pathname.startsWith("/bos")) {
-    document.getElementsByTagName("base")[0].setAttribute("href", "/bos/")
-}
-</script>
 <title>BOS Philly - Bringing Circuit Back to Philly</title>
 <link rel="stylesheet" href="index.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -27,15 +22,15 @@ if (window.location.pathname.startsWith("/bos")) {
 <body>
 <header class="fixed">
     <a href="/" id="home">
-        <img id="logo" src="https://bosphilly.com/wp-content/uploads/2021/03/162528690_3841567515927956_3033548685814258535_n-2-e1616116421988-1024x620.png" alt="BOS Logo">
+        <img id="logo" src="wordpress/wp-content/uploads/bos.png" alt="BOS Logo">
     </a>
     <nav>
         <ul>
-            <li><a href="events">Events</a></li>
-            <li><a href="galleries">Galleries</a></li>
-            <li><a href="models">Models</a></li>
-            <li><a href="djs">DJs</a></li>
-            <li><a href="board">Board</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#galleries">Galleries</a></li>
+            <li><a href="#models">Models</a></li>
+            <li><a href="#djs">DJs</a></li>
+            <li><a href="#board">Board</a></li>
         </ul>
         <span>
             <a class='social' href="http://facebook.com/bosphilly" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -50,7 +45,7 @@ if (window.location.pathname.startsWith("/bos")) {
 <section id="splash">
     <div class='splash-background'>
         <video preload autoplay loop muted playsinline poster="">
-            <source src="wordpress/wp-content/uploads/2024/06/Jungle-Aftermovie-big.mp4" type="video/mp4" id="video">
+            <source src="wordpress/wp-content/uploads/Jungle-Aftermovie-big.mp4" type="video/mp4" id="video">
         </video>
     </div>
     <div class="splash-title">
@@ -97,10 +92,10 @@ if (window.location.pathname.startsWith("/bos")) {
 </section>
 <section id="board">
     <h1>Board</h1>
-    <img src="wordpress/wp-content/uploads/2024/06/separator-1.png" id="separator" />
+    <img src="wordpress/wp-content/uploads/separator.png" id="separator" />
     <div class="grid">
         <div class="tile">
-            <img src="wordpress/wp-content/uploads/2024/06/steve.png" alt="Steve McCann" />
+            <img src="wordpress/wp-content/uploads/steve.png" alt="Steve McCann" />
             <h3>Steve McCann</h3>
             <h4>Director of Business</h4>
             <div class="contact">
@@ -110,7 +105,7 @@ if (window.location.pathname.startsWith("/bos")) {
             </div>
         </div>
         <div class="tile">
-            <img src="wordpress/wp-content/uploads/2024/06/matt.png" alt="Matt Rowe" />
+            <img src="wordpress/wp-content/uploads/matt.png" alt="Matt Rowe" />
             <h3>Matt Rowe</h3>
             <h4>Director of Logistics</h4>
             <div class="contact">
@@ -120,7 +115,7 @@ if (window.location.pathname.startsWith("/bos")) {
             </div>
         </div>
         <div class="tile">
-            <img src="wordpress/wp-content/uploads/2024/06/alex.png" alt="Alex Ortiz" />
+            <img src="wordpress/wp-content/uploads/alex.png" alt="Alex Ortiz" />
             <h3>Alex Ortiz</h3>
             <h4>Director of Outreach</h4>
             <div class="contact">
@@ -130,7 +125,7 @@ if (window.location.pathname.startsWith("/bos")) {
             </div>
         </div>
         <div class="tile">
-            <img src="wordpress/wp-content/uploads/2024/06/justin.png" alt="Justin Dile" />
+            <img src="wordpress/wp-content/uploads/justin.png" alt="Justin Dile" />
             <h3>Justin Dile</h3>
             <h4>Director of Coordination</h4>
             <div class="contact">
@@ -147,14 +142,14 @@ if (window.location.pathname.startsWith("/bos")) {
 <section id="partners">
     <div class="title"><h1>Partners:</h1></div>
     <div id="partners-grid">
-        <div><a href="https://circuitmom.com/"><img id="circuitmom" src="wordpress/wp-content/uploads/2024/06/circuit-mom.png" /></a></div>
-        <div><a href="https://www.waygay.org/"><img src="wordpress/wp-content/uploads/2024/06/william-way.png" /></a></div>
-        <div><a href="https://www.andrewchristian.com/"><img src="wordpress/wp-content/uploads/2024/06/andrew-christian.png" /></a></div>
-        <div><a href="https://heymistr.com/"><img src="wordpress/wp-content/uploads/2024/06/mistr.png" /></a></div>
-        <div><a href="https://www.instagram.com/alexanderjohnphoto/"><img src="wordpress/wp-content/uploads/2024/06/alexander-john.png" /></a></div>
-        <div><a href="https://cherryfund.org/"><img src="wordpress/wp-content/uploads/2024/06/the-cherry-fund.png" /></a></div>
-        <div><a href="https://www.marriott.com/en-us/hotels/phlcc-fairfield-inn-and-suites-philadelphia-downtown-center-city/overview/"><img src="wordpress/wp-content/uploads/2024/06/fairfield-marriott.png" /></a></div>
-        <div><a href="https://www.sickening.events/"><img src="wordpress/wp-content/uploads/2024/06/sickening-events.png" /></a></div>
+        <div><a href="https://circuitmom.com/"><img id="circuitmom" src="wordpress/wp-content/uploads/circuit-mom.png" /></a></div>
+        <div><a href="https://www.waygay.org/"><img src="wordpress/wp-content/uploads/william-way.png" /></a></div>
+        <div><a href="https://www.andrewchristian.com/"><img src="wordpress/wp-content/uploads/andrew-christian.png" /></a></div>
+        <div><a href="https://heymistr.com/"><img src="wordpress/wp-content/uploads/mistr.png" /></a></div>
+        <div><a href="https://www.instagram.com/alexanderjohnphoto/"><img src="wordpress/wp-content/uploads/alexander-john.png" /></a></div>
+        <div><a href="https://cherryfund.org/"><img src="wordpress/wp-content/uploads/the-cherry-fund.png" /></a></div>
+        <div><a href="https://www.marriott.com/en-us/hotels/phlcc-fairfield-inn-and-suites-philadelphia-downtown-center-city/overview/"><img src="wordpress/wp-content/uploads/fairfield-marriott.png" /></a></div>
+        <div><a href="https://www.sickening.events/"><img src="wordpress/wp-content/uploads/sickening-events.png" /></a></div>
     </div>
 </section>
 <footer>
@@ -328,9 +323,6 @@ $(async () => {
                 $("title").text(`${data.post_title} - BOS Philly`);
             }
         }
-        else if (qs.page) {
-            // result = await getPages(qs.page);
-        }
     }
 });
 
@@ -349,7 +341,7 @@ if (!$.isEmptyObject(qs)) {
         if (qs.page === "djs")       $("#djs").show().addClass("first-section");
         if (qs.page === "board")     $("#board").show().addClass("first-section");
         $(".more").hide();
-        $("title").text(`${qs.page.toTitleCase()} - BOS Philly`);
+        $("title").text(`${qs.page} - BOS Philly`);
     }
 }
 
