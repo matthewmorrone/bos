@@ -159,6 +159,13 @@ function jsonToTableRow(data, id, ex) {
     return result;
 }
 
+function query() {
+    let qs = {}, slice = 1;
+    if (window.location.pathname.startsWith("/bos")) slice = 2;
+    let [page, name] = [...window.location.pathname.split("/").slice(slice)]
+    qs.page = page, qs.name = name;
+    return qs;
+}
 /*
 function query() {
     let qs = document.location.search;
