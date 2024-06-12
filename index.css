@@ -187,7 +187,7 @@ video::-webkit-media-controls {
     overflow: hidden;
 }
 #events {
-    background-image: url("wordpress/wp-content/uploads/events-background.jpeg");
+    background-image: url("wordpress/wp-content/uploads/events-background.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -315,7 +315,7 @@ button {
 
 
 #djs {
-    background-image: url("wordpress/wp-content/uploads/djs-background.jpeg");
+    background-image: url("wordpress/wp-content/uploads/djs-background.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

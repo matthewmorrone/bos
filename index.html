@@ -262,7 +262,7 @@ $(async () => {
                 data.instagram = result.fields.instagram;
                 data.height = result.fields.height;
                 data.weight = result.fields.weight;
-                data.gallery = result.fields.photo_gallery;
+                data.gallery = result.fields.photo_gallery || [];
 
                 let model_template = `
                 <div class='models'>
@@ -285,12 +285,13 @@ $(async () => {
                 $("title").text(`${data.post_title} - BOS Philly`);
             }
             if (qs.page === "djs") {
+                console.log(result);
                 data.post_title = result.post_title;
                 data.post_name = result.post_name;
                 data.image = result.image;
                 data.post_content = result.post_content;
                 data.hometown = result.fields.hometown;
-                data.gallery = result.fields.galery;
+                data.gallery = result.fields.photo_gallery || [];
                 data.logo = result.fields.logo.url;
                 data.soundcloud_link = result.fields.soundcloud_link;
 
@@ -324,8 +325,8 @@ $(async () => {
             }
         }
     }
+    
 });
-
 
 let qs = query();
 if (!$.isEmptyObject(qs)) {

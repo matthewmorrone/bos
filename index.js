@@ -1,51 +1,57 @@
 async function loadTiles() {
 
     let events = await getPages("events");
-    events = events.map(event => {
-        return {
-            name: event.post_title,
-            date: event.fields.date_of_event,
-            timestamp: luxon.DateTime.fromMillis(Date.parse(event.fields.date_of_event)),
-            url: `events/${event.post_name}`,
-            image: event.image
-        }
-    }).sort(function (a, b) {
-        return a.timestamp > b.timestamp ? 1 : a.timestamp < b.timestamp ? -1 : 0;
-    });
-    let $eventsGrid = $("#events .grid");
-    events.each(event => {
-        $eventsGrid.append(`<div class="event">
-            <a href="${event.url}">
-                <img src="${event.image}" />
-                <h3>${event.name}</h3>
-                <h4>${event.date}</h4>
-                <button>Tickets</button>
-            </a>
-        </div>`);
-    });
-
-    async function tileLoader(url) {
-        let pages = await getPages(url);
-        pages = pages.map(page => {
+    if (events.length) {
+        events = events.map(event => {
             return {
-                name: page.post_title,
-                url: `${url}/${page.post_name}`,
-                image: page.image
+                name: event.post_title,
+                date: event.fields.date_of_event,
+                timestamp: luxon.DateTime.fromMillis(Date.parse(event.fields.date_of_event)),
+                url: `events/${event.post_name}`,
+                image: event.image
             }
+        }).sort(function (a, b) {
+            return a.timestamp > b.timestamp ? 1 : a.timestamp < b.timestamp ? -1 : 0;
         });
-        let $pagesGrid = $(`#${url} .grid`);
-        pages.each(page => {
-            $pagesGrid.append(`<div class="tile container">
-                <a href="${page.url}">
-                    <img src="${page.image}" class="hover" />
-                    <div class="overlay"><div class="hover-text">${page.name}</div></div>
+        let $eventsGrid = $("#events .grid");
+        events.each(event => {
+            $eventsGrid.append(`<div class="event">
+                <a href="${event.url}">
+                    <img src="${event.image}" />
+                    <h3>${event.name}</h3>
+                    <h4>${event.date}</h4>
+                    <button>Tickets</button>
                 </a>
             </div>`);
         });
     }
+
+    async function tileLoader(url) {
+        let pages = await getPages(url);
+        if (pages.length) {
+            pages = pages.map(page => {
+                return {
+                    name: page.post_title,
+                    url: `${url}/${page.post_name}`,
+                    image: page.image || ''
+                }
+            });
+            let $pagesGrid = $(`#${url} .grid`);
+            pages.each(page => {
+                $pagesGrid.append(`<div class="tile container">
+                    <a href="${page.url}">
+                        <img src="${page.image}" class="hover" />
+                        <div class="overlay"><div class="hover-text">${page.name}</div></div>
+                    </a>
+                </div>`);
+            });
+        }
+    }
     tileLoader("galleries");
-    tileLoader("models");
-    tileLoader("djs");
+    await tileLoader("models");
+    $(`#models .grid`).randomize()
+    await tileLoader("djs");
+    $(`#djs .grid`).randomize()
 }
 
 let hasFired = false;
