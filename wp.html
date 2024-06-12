@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=.9, viewport-fit=cover">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="utils.js"></script>
+<script src="wp.js"></script>
+<script>
+$(async () => {
+    let events = await getPages("events");
+    events = events.map(event => { return {"id": event.ID, "name": event.post_name} });
+    events.each(async event => {
+        let info = await getPageById("events", event.id);
+        console.log("event", info.ID, info.post_name, info.fields);
+        info = await getPageByName("events", event.name);
+        console.log("event", info.ID, info.post_name, info.fields);
+    }); 
+
+    let galleries = await getPages("galleries");
+    galleries = galleries.map(gallery => { return {"id": gallery.ID, "name": gallery.post_name}; });
+    galleries.each(async gallery => {
+        let info = await getPageByName("galleries", gallery.name);
+        console.log("gallery", info.ID, info.post_name, info.fields);
+    });
+
+    let djs = await getPages("djs");
+    djs = djs.map(dj => { return {"id": dj.ID, "name": dj.post_name}; });
+    djs.each(async dj => {
+        let info = await getPageByName("djs", dj.name);
+        console.log("djs", info.ID, info.post_name, info.fields);
+    });
+    let models = await getPages("models");
+    models = models.map(model => { return {"id": model.ID, "name": model.post_name}; });
+    models.each(async model => {
+        let info = await getPageByName("models", model.name);
+        console.log("models", info.ID, info.post_name, info);
+    });
+});
+
+</script>
+</head>
+<body>
+</body>
+</html>

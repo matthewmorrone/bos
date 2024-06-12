@@ -30,6 +30,10 @@ if (isset($_["action"])) {
     else {
         $query = new WP_Query($args);
         $posts = $query->get_posts();
+        foreach($posts as &$post):
+            $post->fields = get_fields($post->ID);
+            $post->image = get_the_post_thumbnail_url($post->ID);
+        endforeach;
     }
     if ($_POST) { echo json_encode($posts); }
     else if ($_GET) { echo "<pre>"; print_r($posts); echo "</pre>"; }

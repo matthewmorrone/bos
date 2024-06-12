@@ -1,61 +1,51 @@
 async function loadTiles() {
 
-    let events = await $get("events.csv");
-    events = events.trim().split("\n").map(line => line.split(","));
+    let events = await getPages("events");
+    events = events.map(event => {
+        return {
+            name: event.post_title,
+            date: event.fields.date_of_event,
+            timestamp: luxon.DateTime.fromMillis(Date.parse(event.fields.date_of_event)),
+            url: `events/${event.post_name}`,
+            image: event.image
+        }
+    }).sort(function (a, b) {
+        return a.timestamp > b.timestamp ? 1 : a.timestamp < b.timestamp ? -1 : 0;
+    });
     let $eventsGrid = $("#events .grid");
     events.each(event => {
-        let [name, date, url, image] = [...event];
-        date = date.slice(1, -1)
-        date = luxon.DateTime.fromMillis(Date.parse(date)).toFormat("MMMM d, y")
         $eventsGrid.append(`<div class="event">
-            <a href="${url}">
-                <img src="${image}" />
-                <h3>${name}</h3>
-                <h4>${date}</h4>
+            <a href="${event.url}">
+                <img src="${event.image}" />
+                <h3>${event.name}</h3>
+                <h4>${event.date}</h4>
                 <button>Tickets</button>
             </a>
         </div>`);
     });
 
-    let galleries = await $get("galleries.csv");
-    galleries = galleries.trim().split("\n").map(line => line.split(","));
-    let $galleriesGrid = $("#galleries .grid");
-    galleries.each(gallery => {
-        let [event, url, image] = [...gallery]
-        $galleriesGrid.append(`<div class="tile container">
-            <a href="${url}">
-                <img src="${image}" class="hover" />
-                <div class="overlay"><div class="hover-text">${event}</div></div>
-            </a>
-        </div>`);
-    });
-
-    let models = await $get("models.csv");
-    models = models.trim().split("\n").map(line => line.split(","));
-    let $modelGrid = $("#models .grid");
-    models.each(model => {
-        let [event, url, image] = [...model]
-        $modelGrid.append(`<div class="tile container">
-            <a href="${url}">
-                <img src="${image}" class="hover" />
-                <div class="overlay"><div class="hover-text">${event}</div></div>
-            </a>
-        </div>`);
-    });
-
-    let djs = await $get("djs.csv");
-    djs = djs.trim().split("\n").map(line => line.split(","));
-    let $djGrid = $("#djs .grid");
-    djs.each(dj => {
-        let [event, url, image] = [...dj]
-        $djGrid.append(`<div class="tile container">
-            <a href="${url}">
-                <img src="${image}" class="hover" />
-                <div class="overlay"><div class="hover-text">${event}</div></div>
-            </a>
-        </div>`);
-    });
-
+    async function tileLoader(url) {
+        let pages = await getPages(url);
+        pages = pages.map(page => {
+            return {
+                name: page.post_title,
+                url: `${url}/${page.post_name}`,
+                image: page.image
+            }
+        });
+        let $pagesGrid = $(`#${url} .grid`);
+        pages.each(page => {
+            $pagesGrid.append(`<div class="tile container">
+                <a href="${page.url}">
+                    <img src="${page.image}" class="hover" />
+                    <div class="overlay"><div class="hover-text">${page.name}</div></div>
+                </a>
+            </div>`);
+        });
+    }
+    tileLoader("galleries");
+    tileLoader("models");
+    tileLoader("djs");
 }
 
 let hasFired = false;
@@ -65,7 +55,16 @@ let USDollar = new Intl.NumberFormat('en-US', {
     currency: 'USD',
 });
 
+// TODO: sticky header
+/*
 $(window).scroll(function() {
+    let sticky = $('header'), scroll = $(window).scrollTop();
+    if (scroll > 0) sticky.addClass('fixed');
+    else sticky.removeClass('fixed');
+});
+*/
+
+$(window).scroll(function () {
     function elementScrolled(elem) {
         let docViewTop = $(window).scrollTop();
         let docViewBottom = docViewTop + $(window).height();
@@ -78,7 +77,7 @@ $(window).scroll(function() {
         let end = Math.round(parseFloat($(".counter").attr("end")), 2);
         $(".counter").text(start);
 
-        let interval = setInterval(function() {
+        let interval = setInterval(function () {
             let value = Math.round(parseFloat($(".counter").attr("current")), 2);
             if (value + increment <= end) {
                 value += increment;
@@ -95,14 +94,7 @@ $(window).scroll(function() {
         hasFired = true;
     }
 });
-// TODO: sticky header
-/*
-$(window).scroll(function() {
-    let sticky = $('header'), scroll = $(window).scrollTop();
-    if (scroll > 0) sticky.addClass('fixed');
-    else sticky.removeClass('fixed');
-});
-*/
+
 
 // parallax image movement
 let currentZoom = 1;
@@ -112,21 +104,22 @@ let stepSize = 0.005;
 let deviceWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 let mobileScrollDirection = 1;
 
-window.addEventListener('touchstart', function(e) {
+window.addEventListener('touchstart', function (e) {
     start = e.changedTouches[0];
 });
-window.addEventListener('touchmove', function(e) {
+window.addEventListener('touchmove', function (e) {
     let end = e.changedTouches[0];
     mobileScrollDirection = end.screenY - start.screenY > 0 ? -1 : 1
 });
+['wheel', 'scroll', 'touchmove']
+    .forEach(event => document.querySelector('body').addEventListener(event, parallax, false));
+
 
 function parallax(event) {
     let direction = event.deltaY > 0 ? 1 : -1;
     if (deviceWidth <= 600) direction = mobileScrollDirection;
     zoomImage(direction);
 }
-['wheel', 'scroll', 'touchmove']
-    .forEach(event => document.querySelector('body').addEventListener(event, parallax, false));
 
 function zoomImage(direction) {
     let newZoom = currentZoom + direction * stepSize;
@@ -145,7 +138,7 @@ function scrollTo(element, to, duration) {
 
     let currentTime = 0;
 
-    const animateScroll = function() {
+    const animateScroll = function () {
         currentTime += increment;
         const val = Math.easeInOutQuad(currentTime, start, change, duration);
         element.scrollTop = val;
@@ -156,7 +149,7 @@ function scrollTo(element, to, duration) {
     animateScroll();
 }
 
-Math.easeInOutQuad = function(t, b, c, d) {
+Math.easeInOutQuad = function (t, b, c, d) {
     t /= d / 2;
     if (t < 1) return c / 2 * t * t + b;
     t--;
@@ -164,7 +157,7 @@ Math.easeInOutQuad = function(t, b, c, d) {
 };
 
 $(() => {
-    $.ajaxSetup({cache: false});
+    $.ajaxSetup({ cache: false });
     $("#splash video").width($("#splash").width());
     loadTiles();
 
